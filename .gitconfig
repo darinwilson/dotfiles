@@ -1,0 +1,5 @@
+[user]
+	name = Darin Wilson
+	email = darinwilson@gmail.com
+[credential]
+	helper = osxkeychain
