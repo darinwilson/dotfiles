@@ -30,3 +30,9 @@ for file in $files; do
     ln -s $dir/$file ~/$file
 done
 
+# special case for oh-my-zsh custom directory
+echo "Pointing oh-my-zsh to my custom directory"
+mv ~/.oh-my-zsh/custom ~/.oh-my-zsh/custom.old
+ln -s $dir/.oh-my-zsh/custom ~/.oh-my-zsh/custom
+
+
