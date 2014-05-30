@@ -74,3 +74,13 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+####################################################################
+## Customizations
+
+alias tmux="TERM=screen-256color-bce tmux"
+
+# Disable flow control commands (keeps C-s from freezing everything)
+# (via https://github.com/r00k/dotfiles/blob/master/zshrc)
+stty start undef
+stty stop undef
