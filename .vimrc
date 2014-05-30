@@ -47,19 +47,24 @@ nnoremap <leader>r :e .<CR>
 nnoremap <leader>d :Dash<CR>
 "map <D-F8> :Rake<CR>
 "map <D-S-F8> :.Rake<CR>
-map <D-s> :w<CR>
-map <D-{> :tabp<CR>
-map <D-}> :tabn<CR>
+
+" Note that remapping C-s requires flow control to be disabled
+" (e.g. in .bashrc or .zshrc)
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+
+map <C-{> :tabp<CR>
+map <C-}> :tabn<CR>
 
 " RSpec
 let g:rspec_runner = "os_x_iterm"
-map <D-F8> :call RunCurrentSpecFile()<CR>
-map <D-S-F8> :call RunAllSpecs()<CR>
-map <D-F9> :call RunLastSpec()<CR>
-map <D-S-F9> :call RunNearestSpec()<CR>
+map <C-F8> :call RunCurrentSpecFile()<CR>
+map <C-S-F8> :call RunAllSpecs()<CR>
+map <C-F9> :call RunLastSpec()<CR>
+map <C-S-F9> :call RunNearestSpec()<CR>
 
 " Tube
-map <D-F7> :TubeLastCmd<CR>
+map <C-F7> :TubeLastCmd<CR>
 
 " typos
 iab palylist playlist
