@@ -78,7 +78,11 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 ####################################################################
 ## Customizations
 
+export PGDATA=/usr/local/var/postgres
+
 alias tmux="TERM=screen-256color-bce tmux"
+alias zconf="vi ~/.zshrc"
+alias szconf="source ~/.zshrc"
 
 # Disable flow control commands (keeps C-s from freezing everything)
 # (via https://github.com/r00k/dotfiles/blob/master/zshrc)
@@ -90,4 +94,8 @@ alias gst='git status'
 alias gca='git commit -a'
 alias glg='git log'
 alias gpl='git pull'
+alias gdf='git diff'
+
+# projects
+alias cdv='cd ~/work/link/src/vportal'
 
