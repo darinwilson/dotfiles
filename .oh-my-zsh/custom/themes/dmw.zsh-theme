@@ -7,8 +7,8 @@ setopt promptsubst
 
 autoload -U add-zsh-hook
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$FG[180]%}["
-ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$FG[180]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$FG[247]%}*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
@@ -22,17 +22,17 @@ git_custom_status() {
 
 #RVM and git settings
 if [[ -s ~/.rvm/scripts/rvm ]] ; then
-  RPS1='$(git_custom_status)%{$FG[247]%}[`~/.rvm/bin/rvm-prompt`]%{$reset_color%} $EPS1'
+  RPS1='%{$FG[237]%}[`~/.rvm/bin/rvm-prompt`]%{$reset_color%} $EPS1'
 else
   if which rbenv &> /dev/null; then
-    RPS1='$(git_custom_status)%{$FG[247]%}[`rbenv version | sed -e "s/ (set.*$//"`]%{$reset_color%} $EPS1'
+    RPS1='%{$FG[237]%}[`rbenv version | sed -e "s/ (set.*$//"`]%{$reset_color%} $EPS1'
   else
     if [[ -n `which chruby_prompt_info` && -n `chruby_prompt_info` ]]; then
-      RPS1='$(git_custom_status)%{$FG[247]%}[`chruby_prompt_info`]%{$reset_color%} $EPS1'
+      RPS1='%{$FG[237]%}[`chruby_prompt_info`]%{$reset_color%} $EPS1'
     else
-      RPS1='$(git_custom_status) $EPS1'
+      RPS1='$EPS1'
     fi
   fi
 fi
 
-PROMPT='%{$FG[069]%}[%~% ]%(?.%{$fg[green]%}.%{$FG[247]%})%B$%b '
+PROMPT='%{$FG[069]%}[%~% ]$(git_custom_status)%(?.%{$fg[green]%}.%{$FG[247]%})%B$%b '
