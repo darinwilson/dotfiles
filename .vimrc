@@ -13,6 +13,13 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'thoughtbot/vim-rspec'
+Plugin 'jgdavey/tslime.vim'
+
+" these are all for snipMate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 
 call vundle#end()
 " ------------- end vundle -----------------------
@@ -57,14 +64,11 @@ map <C-{> :tabp<CR>
 map <C-}> :tabn<CR>
 
 " RSpec
-let g:rspec_runner = "os_x_iterm"
-map <C-F8> :call RunCurrentSpecFile()<CR>
-map <C-S-F8> :call RunAllSpecs()<CR>
-map <C-F9> :call RunLastSpec()<CR>
-map <C-S-F9> :call RunNearestSpec()<CR>
-
-" Tube
-map <C-F7> :TubeLastCmd<CR>
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+map <Leader>f :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <CR> :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " typos
 iab palylist playlist

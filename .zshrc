@@ -81,6 +81,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PGDATA=/usr/local/var/postgres
 
 alias tmux="TERM=screen-256color-bce tmux"
+alias tma="tmux attach-session -t"
 alias zconf="vi ~/.zshrc"
 alias szconf="source ~/.zshrc"
 
@@ -98,4 +99,6 @@ alias gdf='git diff'
 
 # projects
 alias cdv='cd ~/work/link/src/vportal'
+
+[[ -s /Users/darin/.nvm/nvm.sh ]] && . /Users/darin/.nvm/nvm.sh # This loads NVM
 
