@@ -1,4 +1,5 @@
 set nocompatible         
+set hidden
 filetype off
 
 " ------------ begin vundle ---------------------
@@ -40,28 +41,28 @@ set number
 set ignorecase
 set smartcase
 
+set wildmode=list:longest,list:full
+
 let mapleader=","
-
-" in Command-T, make <CR> open file in a new tab
-let g:CommandTAcceptSelectionMap = '<C-t>'
-let g:CommandTAcceptSelectionTabMap = '<CR>'
-
-" config Tube plugin to send commands to iTerm
-let g:tube_terminal = "iterm"
 
 inoremap jj <ESC>
 nnoremap <leader>r :e .<CR> 
 nnoremap <leader>d :Dash<CR>
-"map <D-F8> :Rake<CR>
-"map <D-S-F8> :.Rake<CR>
 
+" Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
 " (e.g. in .bashrc or .zshrc)
-map <C-s> <esc>:w<CR>
+map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
-map <C-{> :tabp<CR>
-map <C-}> :tabn<CR>
+" save and redo the last command
+map <F9> :w<CR>@@
+imap <F9> <esc>:w<CR>@@
+
+map <leader>h :bprevious<CR>
+map <leader>l :bnext<CR>
+map <leader>w :bd<CR>
+map <leader>b :buffers<CR>
 
 " RSpec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
