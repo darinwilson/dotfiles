@@ -99,9 +99,16 @@ alias gca='git commit -a'
 alias glg='git log'
 alias gpl='git pull'
 alias gdf='git diff'
+alias gpo='git push origin'
+alias gpp='git pull; git push origin'
 
 # projects
 alias cdv='cd ~/work/link/src/vportal'
+
+# ruby/rails
+alias rirb='rails console'
+alias rsrv='rails server'
+
 
 [[ -s /Users/darin/.nvm/nvm.sh ]] && . /Users/darin/.nvm/nvm.sh # This loads NVM
 
