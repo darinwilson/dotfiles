@@ -66,10 +66,10 @@ map <leader>b :buffers<CR>
 
 " RSpec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-map <Leader>f :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <CR> :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+map <leader>f :call RunCurrentSpecFile()<CR>
+map <leader>s :call RunNearestSpec()<CR>
+map <leader><F8> :call RunLastSpec()<CR>
+map <leader>a :call RunAllSpecs()<CR>
 
 " typos
 iab palylist playlist
