@@ -101,6 +101,8 @@ alias gpl='git pull'
 alias gdf='git diff'
 alias gpo='git push origin'
 alias gpp='git pull; git push origin'
+alias gbr='git branch'
+alias gstapp='git stash pop'
 
 # projects
 alias cdv='cd ~/work/link/src/vportal'
@@ -108,6 +110,7 @@ alias cdv='cd ~/work/link/src/vportal'
 # ruby/rails
 alias rirb='rails console'
 alias rsrv='rails server'
+alias rdb='rails dbconsole'
 
 
 [[ -s /Users/darin/.nvm/nvm.sh ]] && . /Users/darin/.nvm/nvm.sh # This loads NVM

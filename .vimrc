@@ -15,6 +15,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
+Plugin 'troydm/easybuffer.vim'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -37,6 +38,7 @@ set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent
 set number
+set ruler
 
 set ignorecase
 set smartcase
@@ -62,7 +64,9 @@ imap <F9> <esc>:w<CR>@@
 map <leader>h :bprevious<CR>
 map <leader>l :bnext<CR>
 map <leader>w :bd<CR>
-map <leader>b :buffers<CR>
+map <leader>b :EasyBuffer<CR>
+
+map <leader>k :Ack <cword><CR>
 
 " RSpec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
