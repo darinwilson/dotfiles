@@ -16,6 +16,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'troydm/easybuffer.vim'
+Plugin 'wting/rust.vim'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -43,7 +44,12 @@ set ruler
 set ignorecase
 set smartcase
 
+" Command-T hacks
+let g:CommandTWildIgnore=&wildignore . ",**/cache/*"
 set wildmode=list:longest,list:full
+"if &term =~ "xterm" || &term =~ "screen"
+"  let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+"endif
 
 let mapleader=","
 
