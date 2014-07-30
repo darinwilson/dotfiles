@@ -96,7 +96,7 @@ stty stop undef
 # git
 alias gst='git status'
 alias gca='git commit -a'
-alias glg='git log'
+alias glg='git l'
 alias gpl='git pull'
 alias gdf='git diff'
 alias gpo='git push origin'
@@ -114,4 +114,6 @@ alias rdb='rails dbconsole'
 
 
 [[ -s /Users/darin/.nvm/nvm.sh ]] && . /Users/darin/.nvm/nvm.sh # This loads NVM
+
+export WEBKIT=true
 

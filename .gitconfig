@@ -3,3 +3,8 @@
 	email = darinwilson@gmail.com
 [credential]
 	helper = osxkeychain
+[color]
+  ui=auto
+[alias]
+  l = "!. ~/.githelpers && pretty_git_log"
+
