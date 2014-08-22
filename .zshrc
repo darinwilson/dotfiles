@@ -103,17 +103,36 @@ alias gpo='git push origin'
 alias gpp='git pull; git push origin'
 alias gbr='git branch'
 alias gstapp='git stash pop'
+alias gaa='git add -A'
 
 # projects
 alias cdv='cd ~/work/link/src/vportal'
+alias cdu='cd ~/work/ucb/src/apbears'
 
 # ruby/rails
 alias rirb='rails console'
 alias rsrv='rails server'
-alias rdb='rails dbconsole'
+alias rdb='rails dbconsole -p'
 
+# link
+source ~/.linkdevrc
 
-[[ -s /Users/darin/.nvm/nvm.sh ]] && . /Users/darin/.nvm/nvm.sh # This loads NVM
+# ucb setup
+export APBEARS_ORACLE=true
+export ORACLE_HOME=/Users/darin/work/ucb/Oracle/instantclient_11_2
+export DYLD_LIBRARY_PATH=$ORACLE_HOME
+export TNS_ADMIN=$ORACLE_HOME/network/admin
+export PATH=$PATH:$ORACLE_HOME
+alias rsldb='git checkout -- db/legacy_test.sqlite3'
+alias sshucb='ssh -i .ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
+
+# android
+export ANDROID_HOME=/Users/darin/work/android
 
 export WEBKIT=true
+
+vimgem() {
+  gemdir=`bundle show $1`
+  vim -c "cd $gemdir" 
+}
 

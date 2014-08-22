@@ -17,6 +17,7 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'wting/rust.vim'
+Plugin 'scrooloose/nerdtree'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -50,11 +51,13 @@ set wildmode=list:longest,list:full
 "if &term =~ "xterm" || &term =~ "screen"
 "  let g:CommandTCancelMap = ['<ESC>', '<C-c>']
 "endif
+map <leader>T :CommandTFlush<CR>
 
 let mapleader=","
 
 inoremap jj <ESC>
-nnoremap <leader>r :e .<CR> 
+nnoremap <leader>r :NERDTree<CR> 
+nnoremap <leader>R :NERDTreeClose<CR> 
 nnoremap <leader>d :Dash<CR>
 
 " Ctrl-S = save
@@ -67,8 +70,8 @@ imap <C-s> <esc>:w<CR>
 map <F9> :w<CR>@@
 imap <F9> <esc>:w<CR>@@
 
-map <leader>h :bprevious<CR>
-map <leader>l :bnext<CR>
+map <leader>n :bprevious<CR>
+map <leader>m :bnext<CR>
 map <leader>w :bd<CR>
 map <leader>b :EasyBuffer<CR>
 
@@ -78,7 +81,7 @@ map <leader>k :Ack <cword><CR>
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 map <leader>f :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>
-map <leader><F8> :call RunLastSpec()<CR>
+map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 
 " typos
