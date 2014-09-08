@@ -56,8 +56,8 @@ map <leader>T :CommandTFlush<CR>
 let mapleader=","
 
 inoremap jj <ESC>
-nnoremap <leader>r :NERDTree<CR> 
-nnoremap <leader>R :NERDTreeClose<CR> 
+nnoremap <leader>r :NERDTree<CR> <bar> :!tmux resize-pane -t 2 -L 30<CR> 
+nnoremap <leader>R :NERDTreeClose<CR> <bar> :!tmux resize-pane -t 2 -R 30<CR>
 nnoremap <leader>d :Dash<CR>
 
 " Ctrl-S = save
@@ -69,6 +69,8 @@ imap <C-s> <esc>:w<CR>
 " save and redo the last command
 map <F9> :w<CR>@@
 imap <F9> <esc>:w<CR>@@
+map <F8> :w<CR>:call RunLastSpec()<CR>
+imap <F8> <esc>:w<CR>:call RunLastSpec()<CR>
 
 map <leader>n :bprevious<CR>
 map <leader>m :bnext<CR>

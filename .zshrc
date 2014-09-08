@@ -124,7 +124,8 @@ export DYLD_LIBRARY_PATH=$ORACLE_HOME
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$PATH:$ORACLE_HOME
 alias rsldb='git checkout -- db/legacy_test.sqlite3'
-alias sshucb='ssh -i .ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
+alias sshucb='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
+alias sshucbprod='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-prod.ist.berkeley.edu'
 
 # android
 export ANDROID_HOME=/Users/darin/work/android
