@@ -22,7 +22,7 @@ AUTHOR="%C(bold blue)<%an>%Creset"
 REFS="%C(bold red)%d%Creset"
 SUBJECT="%s"
 
-FORMAT="$HASH}$RELATIVE_TIME}$AUTHOR}$REFS $SUBJECT"
+FORMAT="$HASH}$RELATIVE_TIME}$AUTHOR} $SUBJECT"
 
 ANSI_BLACK='\033[30m'
 ANSI_BLACK_BOLD='\033[0;30;1m'
@@ -54,10 +54,14 @@ pretty_git_log() {
         sed -Ee 's/\<(.*) (.*)\>/\1/' |
         # convert "Darin" to "me" (OSX can't do case-insensitive sed)
         sed -Ee 's/(Darin)|(darin)/me/' |
+        # special for ucb
+        sed -Ee 's/(<stevedowney>|stevedowney>)/sdowney/' |
+        sed -Ee 's/(<elle.suzuki>)/elle/' |
+        sed -Ee 's/(<ken\.miller>|Ken Miller>)/Ken/' |
         # Replace (2 years ago) with (2 years)
         sed -Ee 's/(^[^<]*) ago/\1/' |
         # Replace (2 years, 5 months) with (2 years)
-        sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
+        sed -Ee 's/(^[^<]*), .*month?\)/\1)/' |
         # Line columns up based on } delimiter
         column -s '}' -t |
         # Color merge commits specially

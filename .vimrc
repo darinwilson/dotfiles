@@ -18,6 +18,7 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'wting/rust.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -67,15 +68,15 @@ map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
 " save and redo the last command
-map <F9> :w<CR>@@
-imap <F9> <esc>:w<CR>@@
+map <F9> :w<CR>@:
+imap <F9> <esc>:w<CR>@:
 map <F8> :w<CR>:call RunLastSpec()<CR>
 imap <F8> <esc>:w<CR>:call RunLastSpec()<CR>
 
 map <leader>n :bprevious<CR>
 map <leader>m :bnext<CR>
 map <leader>w :bd<CR>
-map <leader>b :EasyBuffer<CR>
+map <leader>b :CtrlPBuffer<CR>
 
 map <leader>k :Ack <cword><CR>
 
