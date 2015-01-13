@@ -108,6 +108,8 @@ alias gaa='git add -A'
 # projects
 alias cdv='cd ~/work/link/src/vportal'
 alias cdu='cd ~/work/ucb/src/apbears'
+alias cdcm='cd ~/work/ucb/src/calmsgs-rails3/trunk'
+alias cde='cd ~/work/ir/envoy/envoy_android_app'
 
 # ruby/rails
 alias rirb='rails console'
@@ -124,20 +126,30 @@ export ORACLE_HOME=/Users/darin/work/ucb/Oracle/instantclient_11_2
 export DYLD_LIBRARY_PATH=$ORACLE_HOME
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$PATH:$ORACLE_HOME
+export SVN_EDITOR=vim
 alias rsldb='git checkout -- db/legacy_test.sqlite3'
-alias sshucb='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
-alias sshucbprod='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-prod.ist.berkeley.edu'
+alias sshapb='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
+alias sshapbprod='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-prod.ist.berkeley.edu'
+alias sshcms='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-ucproposals-qa.ist.berkeley.edu'
+alias qadb='ssh -L 40002:dba-oracle-qa-30.ist.berkeley.edu:1533 darinwilson@as-axolotl-qa.ist.berkeley.edu -i ~/.ssh/id_rsa_ucb -N'
 
 # android
-export ANDROID_HOME=/Users/darin/work/android
+export RUBYMOTION_ANDROID_SDK=~/android-rubymotion/sdk
+export RUBYMOTION_ANDROID_NDK=~/android-rubymotion/ndk
+alias kick="/Users/darin/android-rubymotion/sdk/platform-tools/adb -d logcat"
 
 export WEBKIT=true
 
-export DATABASE_URL=postgres:///$(whoami)
+#export DATABASE_URL=postgres:///$()
 
 vimgem() {
   gemdir=`bundle show $1`
   vim -c "cd $gemdir" 
+}
+
+gemdoc() {
+  gem rdoc $1 --rdoc
+  (cd `gem env gemdir`/doc/$1*; open rdoc/index.html)
 }
 
 tmlg() {

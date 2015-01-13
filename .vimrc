@@ -8,7 +8,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'mileszs/ack.vim'
-Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-rails'
@@ -46,20 +45,15 @@ set ruler
 set ignorecase
 set smartcase
 
-" Command-T hacks
-let g:CommandTWildIgnore=&wildignore . ",**/cache/*"
-set wildmode=list:longest,list:full
-"if &term =~ "xterm" || &term =~ "screen"
-"  let g:CommandTCancelMap = ['<ESC>', '<C-c>']
-"endif
-map <leader>T :CommandTFlush<CR>
-
 let mapleader=","
 
 inoremap jj <ESC>
 nnoremap <leader>r :NERDTree<CR> <bar> :!tmux resize-pane -t 2 -L 30<CR> 
-nnoremap <leader>R :NERDTreeClose<CR> <bar> :!tmux resize-pane -t 2 -R 30<CR>
+nnoremap <leader>R :NERDTreeClose<CR> <bar> :!tmux resize-pane -t 2 -R 30<CR><CR>
 nnoremap <leader>d :Dash<CR>
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP `pwd`'
 
 " Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
@@ -67,18 +61,28 @@ nnoremap <leader>d :Dash<CR>
 map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
-" save and redo the last command
-map <F9> :w<CR>@:
-imap <F9> <esc>:w<CR>@:
+" run specs
 map <F8> :w<CR>:call RunLastSpec()<CR>
 imap <F8> <esc>:w<CR>:call RunLastSpec()<CR>
+
+" RM Android - save all and run on device
+map <F9> :wa<CR>:call SendToTmux("\x3rake device\n")<CR>
+imap <F9> <esc>:wa<CR>:call SendToTmux("\x3rake device\n")<CR>
+
+" save and run last command
+"map <F9> :w<CR>@:
+"imap <F9> <esc>:w<CR>@:
 
 map <leader>n :bprevious<CR>
 map <leader>m :bnext<CR>
 map <leader>w :bd<CR>
 map <leader>b :CtrlPBuffer<CR>
 
+map <leader>i :set invnumber<CR>
 map <leader>k :Ack <cword><CR>
+
+" close other pane
+map <leader>W <C-w><C-w>:bd<CR>
 
 " RSpec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
