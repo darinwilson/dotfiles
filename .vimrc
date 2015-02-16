@@ -66,8 +66,10 @@ map <F8> :w<CR>:call RunLastSpec()<CR>
 imap <F8> <esc>:w<CR>:call RunLastSpec()<CR>
 
 " RM Android - save all and run on device
-map <F9> :wa<CR>:call SendToTmux("\x3rake device\n")<CR>
-imap <F9> <esc>:wa<CR>:call SendToTmux("\x3rake device\n")<CR>
+map <F9> :wa<CR>:call SendToTmux("q\x3rake device\n")<CR>
+imap <F9> <esc>:wa<CR>:call SendToTmux("q\x3rake device\n")<CR>
+map <F7> :wa<CR>:call SendToTmux("q\x3rake clean; rake device\n")<CR>
+imap <F7> <esc>:wa<CR>:call SendToTmux("q\x3rake clean; rake device\n")<CR>
 
 " save and run last command
 "map <F9> :w<CR>@:

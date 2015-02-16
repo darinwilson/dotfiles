@@ -82,6 +82,7 @@ export PGDATA=/usr/local/var/postgres
 
 alias zconf="vi ~/.zshrc"
 alias szconf="source ~/.zshrc"
+alias vg="vagrant"
 
 # tmux
 alias tmux="TERM=screen-256color-bce tmux"
@@ -110,6 +111,7 @@ alias cdv='cd ~/work/link/src/vportal'
 alias cdu='cd ~/work/ucb/src/apbears'
 alias cdcm='cd ~/work/ucb/src/calmsgs-rails3/trunk'
 alias cde='cd ~/work/ir/envoy/envoy_android_app'
+alias cdsad='cd ~/files/music/sad2015/mixed'
 
 # ruby/rails
 alias rirb='rails console'
@@ -127,6 +129,8 @@ export DYLD_LIBRARY_PATH=$ORACLE_HOME
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$PATH:$ORACLE_HOME
 export SVN_EDITOR=vim
+  # calmsgs needs svn :(
+export SVN_SSH="ssh -i /Users/darin/.ssh/id_dsa_ucb_code"
 alias rsldb='git checkout -- db/legacy_test.sqlite3'
 alias sshapb='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
 alias sshapbprod='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-prod.ist.berkeley.edu'
@@ -136,7 +140,10 @@ alias qadb='ssh -L 40002:dba-oracle-qa-30.ist.berkeley.edu:1533 darinwilson@as-a
 # android
 export RUBYMOTION_ANDROID_SDK=~/android-rubymotion/sdk
 export RUBYMOTION_ANDROID_NDK=~/android-rubymotion/ndk
+export ANT_HOME=~/android-rubymotion/apache-ant-1.9.4
+export PATH=$PATH:$RUBYMOTION_ANDROID_SDK/tools:$RUBYMOTION_ANDROID_SDK/platform-tools:$ANT_HOME/bin
 alias kick="/Users/darin/android-rubymotion/sdk/platform-tools/adb -d logcat"
+alias cdrm='cd ~/work/ruby-motion/android'
 
 export WEBKIT=true
 
