@@ -1,0 +1,43 @@
+snippet xml
+	<?xml version="1.0" encoding="utf-8"?>
+snippet lw
+	android:layout_width="${1:match_parent}"
+snippet lh
+	android:layout_height="${1:match_parent}"
+snippet mp
+	match_parent
+snippet wc
+	wrap_content
+snippet id
+	android:id="@+id/${1}"
+snippet lch
+	android:layout_centerHorizontal="${1:true}"
+snippet lcv
+	android:layout_centerVertical="${1:true}"
+snippet txt
+	android:text="@string/${1}"
+snippet ll
+	<LinearLayout ${1:xmlns:android="http://schemas.android.com/apk/res/android"}
+	  android:layout_width="${2:match_parent}"
+	  android:layout_height="${3:match_parent}"
+	  android:gravity="${4:center}"
+	  android:orientation="${5:vertical}" >
+
+	  ${6}
+	  
+	</LinearLayout>
+snippet textview
+	<TextView
+	  android:id="@+id/${1}"
+	  android:layout_width="${2:wrap_content}"
+	  android:layout_height="${3:wrap_content}"
+	  ${3} />
+snippet button
+	<Button
+	  android:id="@+id/${1}"
+	  android:layout_width="${2:wrap_content}"
+	  android:layout_height="${3:wrap_content}"
+	  ${3} />
+snippet str
+	<string name="${1}">${2}</string>
+
