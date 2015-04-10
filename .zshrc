@@ -145,6 +145,13 @@ export PATH=$PATH:$RUBYMOTION_ANDROID_SDK/tools:$RUBYMOTION_ANDROID_SDK/platform
 alias kick="/Users/darin/android-rubymotion/sdk/platform-tools/adb -d logcat"
 alias cdrm='cd ~/work/ruby-motion/android'
 
+# heroku
+alias hr="heroku"
+alias hrc="heroku run rails console"
+
+# donorstack
+source ~/.dsdevrc
+
 export WEBKIT=true
 
 #export DATABASE_URL=postgres:///$()
@@ -161,4 +168,8 @@ gemdoc() {
 
 tmlg() {
   tmux select-layout "0: ~* (3 panes) [203x48] [layout 20b5,203x48,0,0{90x48,0,0[90x24,0,0,0,90x23,0,25,2],112x48,91,0,1}] @0 (active) 1: ~- (3 panes) [203x48] [layout 7f94,203x48,0,0[203x24,0,0{101x24,0,0,3,101x24,102,0,6},203x23,0,25,5]] @1"
+}
+
+mcan() {
+  motion create --template=android $1 && cd $1
 }
