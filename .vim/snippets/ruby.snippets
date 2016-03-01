@@ -7,3 +7,6 @@ snippet before
 	before(${1::each}) do
 	  ${0}
 	end
+snippet gm
+	app.archs = ["x86"] unless ARGV.include?("device") || ARGV.include?("archive")
+

@@ -8,3 +8,5 @@
 [alias]
   l = "!. ~/.githelpers && pretty_git_log"
 
+[core]
+	editor = /usr/local/bin/vim

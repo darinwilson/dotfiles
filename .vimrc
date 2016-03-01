@@ -1,9 +1,10 @@
-set nocompatible         
+set nocompatible
 set hidden
 filetype off
 
 " ------------ begin vundle ---------------------
 set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
@@ -17,7 +18,18 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'wting/rust.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'c-brenn/mix-test.vim'
+
+" markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" JS & React
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -47,13 +59,30 @@ set smartcase
 
 let mapleader=","
 
+" don't automatically fold sections in Markdown files
+let g:vim_markdown_folding_disabled=1
+
 inoremap jj <ESC>
-nnoremap <leader>r :NERDTree<CR> <bar> :!tmux resize-pane -t 2 -L 30<CR> 
-nnoremap <leader>R :NERDTreeClose<CR> <bar> :!tmux resize-pane -t 2 -R 30<CR><CR>
+nnoremap <leader>r :NERDTree<CR>
+nnoremap <leader>R :NERDTreeClose<CR>
+"nnoremap <leader>r :NERDTree<CR> <bar> :!tmux resize-pane -t 2 -L 30<CR>
+"nnoremap <leader>R :NERDTreeClose<CR> <bar> :!tmux resize-pane -t 2 -R 30<CR><CR>
 nnoremap <leader>d :Dash<CR>
+
+" strip trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" disable auto commenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP `pwd`'
+unlet g:ctrlp_custom_ignore
+unlet g:ctrlp_user_command
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v[\/](\.git|node_modules|doc|deps|_build)$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
 
 " Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
@@ -62,14 +91,16 @@ map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
 " run specs
-map <F8> :w<CR>:call RunLastSpec()<CR>
-imap <F8> <esc>:w<CR>:call RunLastSpec()<CR>
+map <F8> :w<CR>:call TestLast()<CR>
+imap <F8> <esc>:w<CR>:call TestLast()<CR>
+"map <F8> :wa<CR>:call SendToTmux("q\x3rake spec\n")<CR>
+"map <F8> <esc>:wa<CR>:call SendToTmux("q\x3rake spec\n")<CR>
 
 " RM Android - save all and run on device
-map <F9> :wa<CR>:call SendToTmux("q\x3rake device\n")<CR>
-imap <F9> <esc>:wa<CR>:call SendToTmux("q\x3rake device\n")<CR>
-map <F7> :wa<CR>:call SendToTmux("q\x3rake clean; rake device\n")<CR>
-imap <F7> <esc>:wa<CR>:call SendToTmux("q\x3rake clean; rake device\n")<CR>
+map <F9> :wa<CR>:call SendToTmux("\x3\x3rake device\n")<CR>
+imap <F9> <esc>:wa<CR>:call SendToTmux("\x3\x3rake device\n")<CR>
+map <F7> :wa<CR>:call SendToTmux("\x3\x3rake clean; rake \n")<CR>
+imap <F7> <esc>:wa<CR>:call SendToTmux("\x3\x3rake clean; rake \n")<CR>
 
 " save and run last command
 "map <F9> :w<CR>@:
@@ -81,17 +112,63 @@ map <leader>w :bd<CR>
 map <leader>b :CtrlPBuffer<CR>
 
 map <leader>i :set invnumber<CR>
+
+" search
+command -nargs=+ ARb :Ack --ruby <args>
 map <leader>k :Ack <cword><CR>
+map <leader>K :ARb <cword><CR>
 
-" close other pane
-map <leader>W <C-w><C-w>:bd<CR>
+" close all
+map <leader>W :1,1000bd<CR>
 
-" RSpec
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-map <leader>f :call RunCurrentSpecFile()<CR>
-map <leader>s :call RunNearestSpec()<CR>
-map <leader>l :call RunLastSpec()<CR>
-map <leader>a :call RunAllSpecs()<CR>
+" Testing
+let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
+map <leader>f :call TestCurrentFile()<CR>
+map <leader>s :call TestNearest()<CR>
+map <leader>l :call TestLast()<CR>
+map <leader>a :call TestAll()<CR>
+
+let g:mix_test_command = 'call Send_to_Tmux("mix test {test}\n")'
+
+function! TestCurrentFile()
+  if InMixTestFile()
+    call MixRunCurrentTestFile()
+  else
+    call RunCurrentSpecFile()
+  endif
+endfunction
+
+function! TestNearest()
+  if InMixTestFile()
+    call MixRunCurrentTest()
+  else
+    call RunNearestSpec()
+  endif
+endfunction
+
+function! TestLast()
+  if InMixProject()
+    call MixRunLastTest()
+  else
+    call RunLastSpec()
+  endif
+endfunction
+
+function! TestAll()
+  if InMixProject()
+    call MixRunAllTests()
+  else
+    call RunAllSpecs()
+    rspec.vim
+  endif
+endfunction
+
+" EZ editing and sourcing of .vimrc
+:nnoremap <leader>ev :split $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" word wrapping for prose mode
+:nnoremap <leader>pm :set wrap<cr>:set linebreak<cr>:set nolist<cr>
 
 " typos
 iab palylist playlist

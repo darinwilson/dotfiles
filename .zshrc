@@ -24,7 +24,7 @@ ZSH_THEME="dmw"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to disable command auto-correction.
 # DISABLE_CORRECTION="true"
@@ -111,7 +111,9 @@ alias cdv='cd ~/work/link/src/vportal'
 alias cdu='cd ~/work/ucb/src/apbears'
 alias cdcm='cd ~/work/ucb/src/calmsgs-rails3/trunk'
 alias cde='cd ~/work/ir/envoy/envoy_android_app'
-alias cdsad='cd ~/files/music/sad2015/mixed'
+alias cdsad='cd ~/files/music/sad2016/mixes'
+alias cdds='cd ~/work/donorstack/src/lupine'
+alias cdto='cd ~/work/ir/trackops/trackops-mobile'
 
 # ruby/rails
 alias rirb='rails console'
@@ -138,12 +140,16 @@ alias sshcms='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-ucproposals-qa.
 alias qadb='ssh -L 40002:dba-oracle-qa-30.ist.berkeley.edu:1533 darinwilson@as-axolotl-qa.ist.berkeley.edu -i ~/.ssh/id_rsa_ucb -N'
 
 # android
-export RUBYMOTION_ANDROID_SDK=~/android-rubymotion/sdk
-export RUBYMOTION_ANDROID_NDK=~/android-rubymotion/ndk
-export ANT_HOME=~/android-rubymotion/apache-ant-1.9.4
+export RUBYMOTION_ANDROID_SDK=/Users/darin/.rubymotion-android/sdk
+export RUBYMOTION_ANDROID_NDK=/Users/darin/.rubymotion-android/ndk
+export ANDROID_HOME=$RUBYMOTION_ANDROID_SDK
 export PATH=$PATH:$RUBYMOTION_ANDROID_SDK/tools:$RUBYMOTION_ANDROID_SDK/platform-tools:$ANT_HOME/bin
-alias kick="/Users/darin/android-rubymotion/sdk/platform-tools/adb -d logcat"
+alias kick="/Users/darin/.rubymotion-android/sdk/platform-tools/adb -d logcat"
 alias cdrm='cd ~/work/ruby-motion/android'
+alias rd="rake device"
+
+# ios
+alias iosim='/Applications/Xcode.app/Contents/Developer/Applications/iOS\ Simulator.app/Contents/MacOS/iOS\ Simulator'
 
 # heroku
 alias hr="heroku"
@@ -151,6 +157,15 @@ alias hrc="heroku run rails console"
 
 # donorstack
 source ~/.dsdevrc
+alias startredis='redis-server /usr/local/etc/redis.conf'
+
+# aws
+source ~/.awsrc
+
+# elixir
+export PATH=$PATH:/usr/local/Cellar/elixir/1.0.5/bin
+export STRIPE_SECRET_KEY=sk_test_vrBvHVCm7JlUJl1uwEC6ZBQD
+export SMTP_PORT=1025
 
 export WEBKIT=true
 
@@ -158,7 +173,7 @@ export WEBKIT=true
 
 vimgem() {
   gemdir=`bundle show $1`
-  vim -c "cd $gemdir" 
+  vim -c "cd $gemdir"
 }
 
 gemdoc() {
@@ -173,3 +188,11 @@ tmlg() {
 mcan() {
   motion create --template=android $1 && cd $1
 }
+
+# source: http://paulstamatiou.com/hosting-on-amazon-s3-with-cloudfront/
+flushdns() {
+  dig $1 +trace @a.root-servers.net
+}
+
+export NVM_DIR="/Users/darin/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
