@@ -77,8 +77,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP `pwd`'
-unlet g:ctrlp_custom_ignore
-unlet g:ctrlp_user_command
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v[\/](\.git|node_modules|doc|deps|_build)$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
