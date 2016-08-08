@@ -105,6 +105,7 @@ alias gpp='git pull; git push origin'
 alias gbr='git branch'
 alias gstapp='git stash pop'
 alias gaa='git add -A'
+alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
 
 # projects
 alias cdv='cd ~/work/link/src/vportal'
@@ -114,30 +115,20 @@ alias cde='cd ~/work/ir/envoy/envoy_android_app'
 alias cdsad='cd ~/files/music/sad2016/mixes'
 alias cdds='cd ~/work/donorstack/src/lupine'
 alias cdto='cd ~/work/ir/trackops/trackops-mobile'
+alias cdbl='cd ~/work/ir/blendspace/app-lessons-mobile'
 
 # ruby/rails
 alias rirb='rails console'
 alias rsrv='rails server'
 alias rdb='rails dbconsole -p'
 
+# node
+alias npmwtf='rm -rf ./node_modules && npm install'
+alias rnwtf='watchman watch-del-all && rm -rf ./node_modules && npm install && npm start -- --reset-cache'
+
 # link
 source ~/.linkdevrc
 alias sshvp='ssh -i ~/.ssh/id_rsa_vportal_prod vportal@video.linktv.org -t "cd sites/vportal; bash -l"'
-
-# ucb setup
-export APBEARS_ORACLE=true
-export ORACLE_HOME=/Users/darin/work/ucb/Oracle/instantclient_11_2
-export DYLD_LIBRARY_PATH=$ORACLE_HOME
-export TNS_ADMIN=$ORACLE_HOME/network/admin
-export PATH=$PATH:$ORACLE_HOME
-export SVN_EDITOR=vim
-  # calmsgs needs svn :(
-export SVN_SSH="ssh -i /Users/darin/.ssh/id_dsa_ucb_code"
-alias rsldb='git checkout -- db/legacy_test.sqlite3'
-alias sshapb='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-qa.ist.berkeley.edu'
-alias sshapbprod='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-axolotl-prod.ist.berkeley.edu'
-alias sshcms='TERM=xterm ssh -i ~/.ssh/id_rsa_ucb darinwilson@as-ucproposals-qa.ist.berkeley.edu'
-alias qadb='ssh -L 40002:dba-oracle-qa-30.ist.berkeley.edu:1533 darinwilson@as-axolotl-qa.ist.berkeley.edu -i ~/.ssh/id_rsa_ucb -N'
 
 # android
 export RUBYMOTION_ANDROID_SDK=/Users/darin/.rubymotion-android/sdk
@@ -149,11 +140,14 @@ alias cdrm='cd ~/work/ruby-motion/android'
 alias rd="rake device"
 
 # ios
-alias iosim='/Applications/Xcode.app/Contents/Developer/Applications/iOS\ Simulator.app/Contents/MacOS/iOS\ Simulator'
+alias iosim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
 
 # heroku
 alias hr="heroku"
 alias hrc="heroku run rails console"
+
+# digital ocean
+alias sshdo='ssh -i ~/.ssh/id_rsa_pdb root@159.203.229.167'
 
 # donorstack
 source ~/.dsdevrc
@@ -163,9 +157,10 @@ alias startredis='redis-server /usr/local/etc/redis.conf'
 source ~/.awsrc
 
 # elixir
-export PATH=$PATH:/usr/local/Cellar/elixir/1.0.5/bin
 export STRIPE_SECRET_KEY=sk_test_vrBvHVCm7JlUJl1uwEC6ZBQD
 export SMTP_PORT=1025
+alias phs='iex -S mix phoenix.server'
+alias mdep='mix deps.get && mix deps.compile'
 
 export WEBKIT=true
 
@@ -196,3 +191,5 @@ flushdns() {
 
 export NVM_DIR="/Users/darin/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

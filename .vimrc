@@ -22,6 +22,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'c-brenn/mix-test.vim'
+Plugin 'scrooloose/nerdcommenter'
 
 " markdown
 Plugin 'godlygeek/tabular'
@@ -30,6 +31,9 @@ Plugin 'plasticboy/vim-markdown'
 " JS & React
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+
+" Elm
+Plugin 'lambdatoast/elm.vim'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -56,6 +60,9 @@ set ruler
 
 set ignorecase
 set smartcase
+
+" turn on JSX highlighting in all file types
+let g:jsx_ext_required = 0
 
 let mapleader=","
 
@@ -168,5 +175,23 @@ endfunction
 " word wrapping for prose mode
 :nnoremap <leader>pm :set wrap<cr>:set linebreak<cr>:set nolist<cr>
 
-" typos
-iab palylist playlist
+" tmux
+function! CmdToTmux()
+  call inputsave()
+  let cmd = input('Command: ')
+  let s:last_tmux_cmd = cmd
+  call inputrestore()
+  call SendToTmux(cmd . "\n")
+endfunction
+
+function! RunLastCmdToTmux()
+  if exists("s:last_tmux_cmd")
+    call SendToTmux(s:last_tmux_cmd . "\n")
+  endif
+endfunction
+
+map <leader>t :call CmdToTmux()<CR>
+map <leader>rt :wa<CR>:call RunLastCmdToTmux()<CR>
+
+" blendspace
+:nnoremap <leader>nhc :call SendToTmux("npm run health-check\n")<CR>
