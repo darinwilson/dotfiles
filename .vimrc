@@ -16,13 +16,15 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'troydm/easybuffer.vim'
-Plugin 'wting/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'elixir-lang/vim-elixir'
-Plugin 'c-brenn/mix-test.vim'
+Plugin 'slashmili/alchemist.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'slim-template/vim-slim'
+Plugin 'janko-m/vim-test'
 
 " markdown
 Plugin 'godlygeek/tabular'
@@ -33,7 +35,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 
 " Elm
-Plugin 'lambdatoast/elm.vim'
+Plugin 'ElmCast/elm-vim'
+
+" writing
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'szw/vim-dict'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -69,6 +76,9 @@ let mapleader=","
 " don't automatically fold sections in Markdown files
 let g:vim_markdown_folding_disabled=1
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
 inoremap jj <ESC>
 nnoremap <leader>r :NERDTree<CR>
 nnoremap <leader>R :NERDTreeClose<CR>
@@ -82,12 +92,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 " disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP `pwd`'
-let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/](\.git|node_modules|doc|deps|_build)$',
-    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
@@ -96,16 +104,10 @@ map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
 " run specs
-map <F8> :w<CR>:call TestLast()<CR>
-imap <F8> <esc>:w<CR>:call TestLast()<CR>
+map <F8> :w<CR>:TestLast<CR>
+imap <F8> <esc>:w<CR>:TestLast<CR>
 "map <F8> :wa<CR>:call SendToTmux("q\x3rake spec\n")<CR>
 "map <F8> <esc>:wa<CR>:call SendToTmux("q\x3rake spec\n")<CR>
-
-" RM Android - save all and run on device
-map <F9> :wa<CR>:call SendToTmux("\x3\x3rake device\n")<CR>
-imap <F9> <esc>:wa<CR>:call SendToTmux("\x3\x3rake device\n")<CR>
-map <F7> :wa<CR>:call SendToTmux("\x3\x3rake clean; rake \n")<CR>
-imap <F7> <esc>:wa<CR>:call SendToTmux("\x3\x3rake clean; rake \n")<CR>
 
 " save and run last command
 "map <F9> :w<CR>@:
@@ -120,60 +122,44 @@ map <leader>i :set invnumber<CR>
 
 " search
 command -nargs=+ ARb :Ack --ruby <args>
-map <leader>k :Ack <cword><CR>
+let g:ackprg = "ack -s -H --nocolor --nogroup --column --ignore-dir=node_modules --ignore-dir=deps --ignore-dir=doc --ignore-dir=priv"
+map <leader>k :Ack! <cword><CR>
 map <leader>K :ARb <cword><CR>
+map <leader>ak :Ack!<Space>
 
 " close all
-map <leader>W :1,1000bd<CR>
+map <leader>W :bufdo bd<CR>
+
+" copy entire buffer to clipboard
+map <leader>cb :%w !pbcopy<CR>
 
 " Testing
-let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
-map <leader>f :call TestCurrentFile()<CR>
-map <leader>s :call TestNearest()<CR>
-map <leader>l :call TestLast()<CR>
-map <leader>a :call TestAll()<CR>
-
-let g:mix_test_command = 'call Send_to_Tmux("mix test {test}\n")'
-
-function! TestCurrentFile()
-  if InMixTestFile()
-    call MixRunCurrentTestFile()
-  else
-    call RunCurrentSpecFile()
-  endif
-endfunction
-
-function! TestNearest()
-  if InMixTestFile()
-    call MixRunCurrentTest()
-  else
-    call RunNearestSpec()
-  endif
-endfunction
-
-function! TestLast()
-  if InMixProject()
-    call MixRunLastTest()
-  else
-    call RunLastSpec()
-  endif
-endfunction
-
-function! TestAll()
-  if InMixProject()
-    call MixRunAllTests()
-  else
-    call RunAllSpecs()
-    rspec.vim
-  endif
-endfunction
+let test#strategy = "tslime"
+map <leader>f :TestFile<CR>
+map <leader>s :TestNearest<CR>
+map <leader>l :TestLast<CR>
+map <leader>a :TestSuite<CR>
 
 " EZ editing and sourcing of .vimrc
 :nnoremap <leader>ev :split $MYVIMRC<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" word wrapping for prose mode
-:nnoremap <leader>pm :set wrap<cr>:set linebreak<cr>:set nolist<cr>
+" setup for writing prose
+function! SetupProseMode()
+  set wrap
+  set linebreak
+  set nolist
+  colorscheme pencil
+  set background=light
+  set guifont=Cousine:h14
+  let g:dict_hosts = [
+      \["dict.org", ["gcide", "moby-thesaurus"]]
+      \]
+endfunction
+:nnoremap <leader>pm :call SetupProseMode()<CR>
+
+map <leader>lu :Dict<CR>
+map <leader>lt :Dict<CR>/moby-thesaurus<CR>
 
 " tmux
 function! CmdToTmux()
@@ -193,5 +179,3 @@ endfunction
 map <leader>t :call CmdToTmux()<CR>
 map <leader>rt :wa<CR>:call RunLastCmdToTmux()<CR>
 
-" blendspace
-:nnoremap <leader>nhc :call SendToTmux("npm run health-check\n")<CR>

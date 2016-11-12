@@ -15,7 +15,7 @@ ZSH_THEME="dmw"
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -85,9 +85,13 @@ alias szconf="source ~/.zshrc"
 alias vg="vagrant"
 
 # tmux
-alias tmux="TERM=screen-256color-bce tmux"
+alias tmux="env TERM=xterm-256color tmux"
 alias tma="tmux attach-session -t"
 alias tmls="tmux list-sessions"
+
+# vim
+alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
+alias vi="vim"
 
 # Disable flow control commands (keeps C-s from freezing everything)
 # (via https://github.com/r00k/dotfiles/blob/master/zshrc)
@@ -131,13 +135,8 @@ source ~/.linkdevrc
 alias sshvp='ssh -i ~/.ssh/id_rsa_vportal_prod vportal@video.linktv.org -t "cd sites/vportal; bash -l"'
 
 # android
-export RUBYMOTION_ANDROID_SDK=/Users/darin/.rubymotion-android/sdk
-export RUBYMOTION_ANDROID_NDK=/Users/darin/.rubymotion-android/ndk
-export ANDROID_HOME=$RUBYMOTION_ANDROID_SDK
-export PATH=$PATH:$RUBYMOTION_ANDROID_SDK/tools:$RUBYMOTION_ANDROID_SDK/platform-tools:$ANT_HOME/bin
-alias kick="/Users/darin/.rubymotion-android/sdk/platform-tools/adb -d logcat"
-alias cdrm='cd ~/work/ruby-motion/android'
-alias rd="rake device"
+export ANDROID_HOME=/Users/darin/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # ios
 alias iosim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
@@ -147,7 +146,7 @@ alias hr="heroku"
 alias hrc="heroku run rails console"
 
 # digital ocean
-alias sshdo='ssh -i ~/.ssh/id_rsa_pdb root@159.203.229.167'
+alias sshdo='ssh -i ~/.ssh/id_rsa_pdb root@159.203.254.156'
 
 # donorstack
 source ~/.dsdevrc
@@ -161,10 +160,14 @@ export STRIPE_SECRET_KEY=sk_test_vrBvHVCm7JlUJl1uwEC6ZBQD
 export SMTP_PORT=1025
 alias phs='iex -S mix phoenix.server'
 alias mdep='mix deps.get && mix deps.compile'
+alias mem='mix ecto.migrate'
+alias mer='mix ecto.rollback'
+alias ixm='iex -S mix'
+
+# crossconnect
+source ~/.cc_dev_env
 
 export WEBKIT=true
-
-#export DATABASE_URL=postgres:///$()
 
 vimgem() {
   gemdir=`bundle show $1`
@@ -180,8 +183,9 @@ tmlg() {
   tmux select-layout "0: ~* (3 panes) [203x48] [layout 20b5,203x48,0,0{90x48,0,0[90x24,0,0,0,90x23,0,25,2],112x48,91,0,1}] @0 (active) 1: ~- (3 panes) [203x48] [layout 7f94,203x48,0,0[203x24,0,0{101x24,0,0,3,101x24,102,0,6},203x23,0,25,5]] @1"
 }
 
-mcan() {
-  motion create --template=android $1 && cd $1
+newbr() {
+  git branch --track $1 origin/$1
+  git checkout $1
 }
 
 # source: http://paulstamatiou.com/hosting-on-amazon-s3-with-cloudfront/
