@@ -131,8 +131,8 @@ alias npmwtf='rm -rf ./node_modules && npm install'
 alias rnwtf='watchman watch-del-all && rm -rf ./node_modules && npm install && npm start -- --reset-cache'
 
 # link
-source ~/.linkdevrc
-alias sshvp='ssh -i ~/.ssh/id_rsa_vportal_prod vportal@video.linktv.org -t "cd sites/vportal; bash -l"'
+#source ~/.linkdevrc
+#alias sshvp='ssh -i ~/.ssh/id_rsa_vportal_prod vportal@video.linktv.org -t "cd sites/vportal; bash -l"'
 
 # android
 export ANDROID_HOME=/Users/darin/Library/Android/sdk
