@@ -9,4 +9,7 @@
   l = "!. ~/.githelpers && pretty_git_log"
 
 [core]
-	editor = /usr/local/bin/vim
+	editor = NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim
+	autocrlf = input
+[url "https://github.com"]
+	insteadOf = git://github.com

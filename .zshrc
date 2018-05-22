@@ -83,13 +83,17 @@ export PGDATA=/usr/local/var/postgres
 alias zconf="vi ~/.zshrc"
 alias szconf="source ~/.zshrc"
 alias vg="vagrant"
+alias exm="exercism"
+alias cat="ccat"
 
 # tmux
-alias tmux="env TERM=xterm-256color tmux"
+# use our executable compiled from source
+alias tmux="env TERM=xterm-256color ~/work/oss/tmux/tmux"
 alias tma="tmux attach-session -t"
 alias tmls="tmux list-sessions"
 
 # vim
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
 alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias vi="vim"
 
@@ -112,19 +116,13 @@ alias gaa='git add -A'
 alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
 
 # projects
-alias cdv='cd ~/work/link/src/vportal'
-alias cdu='cd ~/work/ucb/src/apbears'
-alias cdcm='cd ~/work/ucb/src/calmsgs-rails3/trunk'
-alias cde='cd ~/work/ir/envoy/envoy_android_app'
-alias cdsad='cd ~/files/music/sad2016/mixes'
+alias cdsad='cd ~/files/music/sad2018/mixes'
 alias cdds='cd ~/work/donorstack/src/lupine'
-alias cdto='cd ~/work/ir/trackops/trackops-mobile'
-alias cdbl='cd ~/work/ir/blendspace/app-lessons-mobile'
+alias cdfm='cd ~/work/ir/freshmac/FreshmacBackend'
 
 # ruby/rails
-alias rirb='rails console'
-alias rsrv='rails server'
-alias rdb='rails dbconsole -p'
+alias be='bundle exec'
+alias ss='spring stop'
 
 # node
 alias npmwtf='rm -rf ./node_modules && npm install'
@@ -133,6 +131,12 @@ alias rnwtf='watchman watch-del-all && rm -rf ./node_modules && npm install && n
 # link
 #source ~/.linkdevrc
 #alias sshvp='ssh -i ~/.ssh/id_rsa_vportal_prod vportal@video.linktv.org -t "cd sites/vportal; bash -l"'
+
+# turn off paging for postgres
+alias psql='psql -P pager'
+
+# java
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 
 # android
 export ANDROID_HOME=/Users/darin/Library/Android/sdk
@@ -146,7 +150,7 @@ alias hr="heroku"
 alias hrc="heroku run rails console"
 
 # digital ocean
-alias sshdo='ssh -i ~/.ssh/id_rsa_pdb root@159.203.254.156'
+alias sshdo='ssh -i ~/.ssh/id_rsa_pdb elixir@138.68.196.144'
 
 # donorstack
 source ~/.dsdevrc
@@ -155,10 +159,19 @@ alias startredis='redis-server /usr/local/etc/redis.conf'
 # aws
 source ~/.awsrc
 
+# ucb
+alias pdemo='ssh -i ~/.ssh/portal-qa-01.pem ubuntu@portal-demo.berkeley.edu'
+source ~/.ucb_env
+
+# elastic beanstalk
+export PATH=$PATH:~/Library/Python/2.7/bin
+
 # elixir
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 export STRIPE_SECRET_KEY=sk_test_vrBvHVCm7JlUJl1uwEC6ZBQD
 export SMTP_PORT=1025
-alias phs='iex -S mix phoenix.server'
+export ERL_AFLAGS="-kernel shell_history enabled"
+alias phs='iex -S mix phx.server'
 alias mdep='mix deps.get && mix deps.compile'
 alias mem='mix ecto.migrate'
 alias mer='mix ecto.rollback'
@@ -167,6 +180,10 @@ alias ixm='iex -S mix'
 # crossconnect
 source ~/.cc_dev_env
 
+# ecto book
+alias cdeb='cd ~/files/writing/ecto_book/wmecto/Book'
+export SVN_EDITOR=nvim
+
 export WEBKIT=true
 
 vimgem() {
@@ -174,17 +191,28 @@ vimgem() {
   vim -c "cd $gemdir"
 }
 
+vimdep() {
+  vim -c "cd deps/$1"
+}
+
 gemdoc() {
   gem rdoc $1 --rdoc
   (cd `gem env gemdir`/doc/$1*; open rdoc/index.html)
 }
 
+# FIX ME!
 tmlg() {
   tmux select-layout "0: ~* (3 panes) [203x48] [layout 20b5,203x48,0,0{90x48,0,0[90x24,0,0,0,90x23,0,25,2],112x48,91,0,1}] @0 (active) 1: ~- (3 panes) [203x48] [layout 7f94,203x48,0,0[203x24,0,0{101x24,0,0,3,101x24,102,0,6},203x23,0,25,5]] @1"
 }
 
 newbr() {
+  git fetch
   git branch --track $1 origin/$1
+  git checkout $1
+}
+
+gbrc() {
+  git branch $1
   git checkout $1
 }
 
@@ -193,7 +221,35 @@ flushdns() {
   dig $1 +trace @a.root-servers.net
 }
 
-export NVM_DIR="/Users/darin/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Rails shortcuts that are backwards compatible
+rsrv() {
+  if [ -e "bin/rails" ]
+  then
+    bin/rails s
+  else
+    be rails s
+  fi
+}
+
+rirb() {
+  if [ -e "bin/rails" ]
+  then
+    bin/rails c
+  else
+    be rails c
+  fi
+}
+
+rdb() {
+  if [ -e "bin/rails" ]
+  then
+    bin/rails dbconsole -p
+  else
+    be rails dbconsole -p
+  fi
+}
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# added by travis gem
+[ -f /Users/darin/.travis/travis.sh ] && source /Users/darin/.travis/travis.sh

@@ -13,3 +13,6 @@ complete -F _mategem -o dirnames mategem
 export PATH="/usr/local/heroku/bin:$PATH"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/darin/.travis/travis.sh ] && source /Users/darin/.travis/travis.sh

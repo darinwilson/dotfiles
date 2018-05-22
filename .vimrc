@@ -19,12 +19,21 @@ Plugin 'troydm/easybuffer.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
-Plugin 'elixir-lang/vim-elixir'
+Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Shougo/deoplete.nvim'
 Plugin 'slim-template/vim-slim'
 Plugin 'janko-m/vim-test'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-db'
+
+" autocomplete (neovim only)
+if has("nvim")
+  Plugin 'Shougo/deoplete.nvim'
+endif
+
+" git
+Plugin 'tpope/vim-fugitive'
 
 " markdown
 Plugin 'godlygeek/tabular'
@@ -33,9 +42,16 @@ Plugin 'plasticboy/vim-markdown'
 " JS & React
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plugin 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plugin 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plugin 'leafgarland/typescript-vim'
 
 " Elm
-Plugin 'ElmCast/elm-vim'
+Plugin 'lambdatoast/elm.vim'
+
+" CoffeeScript
+Plugin 'kchmck/vim-coffee-script'
 
 " writing
 Plugin 'junegunn/goyo.vim'
@@ -47,6 +63,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'nelstrom/vim-pml'
 
 call vundle#end()
 " ------------- end vundle -----------------------
@@ -55,7 +72,14 @@ filetype plugin indent on
 syntax on
 colorscheme codeschool
 
-set guifont=Monaco:h12
+" full color support
+if has("termguicolors")
+  set termguicolors
+endif
+
+if !has("nvim")
+  set guifont=Source\ Code\ Pro\ Medium:h14
+endif
 set linespace=3
 set foldcolumn=0
 
@@ -68,6 +92,8 @@ set ruler
 set ignorecase
 set smartcase
 
+set relativenumber
+
 " turn on JSX highlighting in all file types
 let g:jsx_ext_required = 0
 
@@ -77,7 +103,24 @@ let mapleader=","
 let g:vim_markdown_folding_disabled=1
 
 " deoplete
+let g:python_host_prog = '/usr/local/bin/python3'
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+  \]
+set completeopt=longest,menuone
+let g:deoplete#sources = {}
+"let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs']
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ '...'
+                \ ]
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
 
 inoremap jj <ESC>
 nnoremap <leader>r :NERDTree<CR>
@@ -95,7 +138,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP `pwd`'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0 " You don't need to cache
 
 " Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
@@ -110,8 +154,8 @@ imap <F8> <esc>:w<CR>:TestLast<CR>
 "map <F8> <esc>:wa<CR>:call SendToTmux("q\x3rake spec\n")<CR>
 
 " save and run last command
-"map <F9> :w<CR>@:
-"imap <F9> <esc>:w<CR>@:
+map <F9> :w<CR>@:
+imap <F9> <esc>:w<CR>@:
 
 map <leader>n :bprevious<CR>
 map <leader>m :bnext<CR>
@@ -122,7 +166,7 @@ map <leader>i :set invnumber<CR>
 
 " search
 command -nargs=+ ARb :Ack --ruby <args>
-let g:ackprg = "ack -s -H --nocolor --nogroup --column --ignore-dir=node_modules --ignore-dir=deps --ignore-dir=doc --ignore-dir=priv"
+let g:ackprg = 'rg --vimgrep --no-heading'
 map <leader>k :Ack! <cword><CR>
 map <leader>K :ARb <cword><CR>
 map <leader>ak :Ack!<Space>
@@ -130,8 +174,8 @@ map <leader>ak :Ack!<Space>
 " close all
 map <leader>W :bufdo bd<CR>
 
-" copy entire buffer to clipboard
-map <leader>cb :%w !pbcopy<CR>
+" copy selection to clipboard
+map <leader>pc :%w !pbcopy<CR><CR>
 
 " Testing
 let test#strategy = "tslime"
@@ -155,6 +199,7 @@ function! SetupProseMode()
   let g:dict_hosts = [
       \["dict.org", ["gcide", "moby-thesaurus"]]
       \]
+  setlocal spell spelllang=en_us
 endfunction
 :nnoremap <leader>pm :call SetupProseMode()<CR>
 
