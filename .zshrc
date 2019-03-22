@@ -60,12 +60,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR=vim
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -116,9 +111,10 @@ alias gaa='git add -A'
 alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/sad2018/mixes'
+alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2019\ Project/mixes'
 alias cdds='cd ~/work/donorstack/src/lupine'
 alias cdfm='cd ~/work/ir/freshmac/FreshmacBackend'
+alias cdvs='cd ~/files/music/live/sets/VS\ 2019\ Project/mixes'
 
 # ruby/rails
 alias be='bundle exec'
@@ -151,6 +147,7 @@ alias hrc="heroku run rails console"
 
 # digital ocean
 alias sshdo='ssh -i ~/.ssh/id_rsa_pdb elixir@138.68.196.144'
+alias sshds='ssh -i ~/.ssh/id_rsa_ds donorstack@45.55.108.205'
 
 # donorstack
 source ~/.dsdevrc
@@ -159,9 +156,16 @@ alias startredis='redis-server /usr/local/etc/redis.conf'
 # aws
 source ~/.awsrc
 
+# petaluma map
+source ~/.aws_env
+
+# slack token (for Slack CLI)
+source ~/.slack-token
+
 # ucb
 alias pdemo='ssh -i ~/.ssh/portal-qa-01.pem ubuntu@portal-demo.berkeley.edu'
 source ~/.ucb_env
+export RAILS_MASTER_KEY=`cat ~/.ucb_rails_master_key`
 
 # elastic beanstalk
 export PATH=$PATH:~/Library/Python/2.7/bin
@@ -247,6 +251,28 @@ rdb() {
   else
     be rails dbconsole -p
   fi
+}
+
+function versions() {
+  local POSTGRES_USED=$(grep -E '\bpg\b' Gemfile | grep -Ev '^\s*#')
+  echo "### Installed Versions ###"
+  ruby --version
+  rails --version
+  [[ -n $POSTGRES_USED ]] && psql --version
+  echo
+
+  echo "### Target Versions ###"
+  echo "# Ruby #"
+  echo "2.6*"
+  echo "2.5 → 2.5.1"
+  echo "2.4 → 2.4.4"
+  echo "2.3 → 2.3.7"
+  echo "2.2 → 2.2.10: EOL"
+  echo "# Rails #"
+  echo "5 → 5.2.0"
+  echo "4 → 4.2.10"
+  echo "3 → 3.2.22.5"
+  call_function_if_it_exists project_versions
 }
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

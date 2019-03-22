@@ -26,26 +26,23 @@ Plugin 'slim-template/vim-slim'
 Plugin 'janko-m/vim-test'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-db'
+Plugin 'TaDaa/vimade'
 
 " autocomplete (neovim only)
 if has("nvim")
-  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
 " git
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 " markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
 " JS & React
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plugin 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plugin 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plugin 'leafgarland/typescript-vim'
+Plugin 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 " Elm
 Plugin 'lambdatoast/elm.vim'
@@ -53,10 +50,16 @@ Plugin 'lambdatoast/elm.vim'
 " CoffeeScript
 Plugin 'kchmck/vim-coffee-script'
 
+" Kotlin
+Plugin 'udalov/kotlin-vim'
+
 " writing
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'szw/vim-dict'
+
+" colorscheme
+Plugin 'mhartington/oceanic-next'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -70,7 +73,22 @@ call vundle#end()
 
 filetype plugin indent on
 syntax on
-colorscheme codeschool
+colorscheme OceanicNext
+
+" JS stuff
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Minimal LSP configuration for JavaScript
+let g:LanguageClient_serverCommands = {}
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  " Use LanguageServer for omnifunc completion
+  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+else
+  echo "javascript-typescript-stdio not installed!\n"
+  :cq
+endif
 
 " full color support
 if has("termguicolors")
@@ -141,6 +159,9 @@ let g:ctrlp_cmd = 'CtrlP `pwd`'
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching = 0 " You don't need to cache
 
+" needed for gitgutter
+let g:gitgutter_terminal_reports_focus=0
+
 " Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
 " (e.g. in .bashrc or .zshrc)
@@ -187,6 +208,9 @@ map <leader>a :TestSuite<CR>
 " EZ editing and sourcing of .vimrc
 :nnoremap <leader>ev :split $MYVIMRC<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Capybara testing - open most recent screenshot
+nnoremap <leader>ss :silent !open tmp/screenshots/`ls -t tmp/screenshots \| head -n1` <cr>
 
 " setup for writing prose
 function! SetupProseMode()
