@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh 
+#!/usr/bin/env zsh
 # This is a slightly tweaked version of the gallois theme
 
 #local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
@@ -7,7 +7,7 @@ setopt promptsubst
 
 autoload -U add-zsh-hook
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$FG[180]%}("
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$FG[073]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$FG[247]%}*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
@@ -35,4 +35,4 @@ else
   fi
 fi
 
-PROMPT='%{$FG[069]%}[%~% ]$(git_custom_status)%(?.%{$fg[green]%}.%{$FG[247]%})%B$%b '
+PROMPT='%{$FG[068]%}[%~% ]$(git_custom_status)%(?.%{$fg[green]%}.%{$FG[247]%})%B$%b '
