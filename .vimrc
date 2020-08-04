@@ -28,6 +28,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-db'
 Plugin 'TaDaa/vimade'
 
+" haml
+Plugin 'tpope/vim-haml'
+
 " autocomplete (neovim only)
 if has("nvim")
   Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -43,6 +46,10 @@ Plugin 'plasticboy/vim-markdown'
 
 " JS & React
 Plugin 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plugin 'mxw/vim-jsx'
+
+" Typescript tsx
+Plugin 'ianks/vim-tsx'
 
 " Elm
 Plugin 'lambdatoast/elm.vim'
@@ -53,6 +60,9 @@ Plugin 'kchmck/vim-coffee-script'
 " Kotlin
 Plugin 'udalov/kotlin-vim'
 
+" Imba
+Plugin 'simeng/vim-imba'
+
 " writing
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
@@ -60,6 +70,7 @@ Plugin 'szw/vim-dict'
 
 " colorscheme
 Plugin 'mhartington/oceanic-next'
+Plugin 'albertorestifo/github.vim'
 
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -162,6 +173,9 @@ let g:ctrlp_use_caching = 0 " You don't need to cache
 " needed for gitgutter
 let g:gitgutter_terminal_reports_focus=0
 
+" reset tslime variables (SendToTmux session, window, pane)
+map <leader>rst :unlet g:tslime<CR>
+
 " Ctrl-S = save
 " Note that remapping C-s requires flow control to be disabled
 " (e.g. in .bashrc or .zshrc)
@@ -198,19 +212,27 @@ map <leader>W :bufdo bd<CR>
 " copy selection to clipboard
 map <leader>pc :%w !pbcopy<CR><CR>
 
+" move selected block up or down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" forward by _ character
+map <leader>ff f_
+
 " Testing
 let test#strategy = "tslime"
 map <leader>f :TestFile<CR>
 map <leader>s :TestNearest<CR>
 map <leader>l :TestLast<CR>
 map <leader>a :TestSuite<CR>
+map <leader>tr :unlet g:tslime<CR>
 
 " EZ editing and sourcing of .vimrc
 :nnoremap <leader>ev :split $MYVIMRC<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Capybara testing - open most recent screenshot
-nnoremap <leader>ss :silent !open tmp/screenshots/`ls -t tmp/screenshots \| head -n1` <cr>
+nnoremap <leader>ss :silent !open `ls -t tmp/screenshots/*.png \| head -n1` <cr>
 
 " setup for writing prose
 function! SetupProseMode()

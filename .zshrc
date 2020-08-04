@@ -60,7 +60,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR=vim
+export EDITOR='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -69,6 +69,8 @@ export EDITOR=vim
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export NLS_LANG=$LANG
 
 ####################################################################
 ## Customizations
@@ -82,8 +84,8 @@ alias exm="exercism"
 alias cat="ccat"
 
 # tmux
-# use our executable compiled from source
-alias tmux="env TERM=xterm-256color ~/work/oss/tmux/tmux"
+# use our executable compiled from source - TODO: don't need this anymore?
+#alias tmux="env TERM=xterm-256color ~/work/oss/tmux/tmux"
 alias tma="tmux attach-session -t"
 alias tmls="tmux list-sessions"
 
@@ -111,10 +113,10 @@ alias gaa='git add -A'
 alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2019\ Project/mixes'
+alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2020\ Project/mixes'
 alias cdds='cd ~/work/donorstack/src/lupine'
 alias cdfm='cd ~/work/ir/freshmac/FreshmacBackend'
-alias cdvs='cd ~/files/music/live/sets/VS\ 2019\ Project/mixes'
+alias cdvs="cd ~/files/music/live/sets/Variety\ Show\ 2020\ Project"
 
 # ruby/rails
 alias be='bundle exec'
@@ -166,12 +168,12 @@ source ~/.slack-token
 alias pdemo='ssh -i ~/.ssh/portal-qa-01.pem ubuntu@portal-demo.berkeley.edu'
 source ~/.ucb_env
 export RAILS_MASTER_KEY=`cat ~/.ucb_rails_master_key`
+export VSPA_HOME='/Users/darin/work/ir/ucb/vspa'
 
 # elastic beanstalk
 export PATH=$PATH:~/Library/Python/2.7/bin
 
 # elixir
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 export STRIPE_SECRET_KEY=sk_test_vrBvHVCm7JlUJl1uwEC6ZBQD
 export SMTP_PORT=1025
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -191,7 +193,7 @@ export SVN_EDITOR=nvim
 export WEBKIT=true
 
 vimgem() {
-  gemdir=`bundle show $1`
+  gemdir=`bundle info $1`
   vim -c "cd $gemdir"
 }
 
@@ -209,7 +211,7 @@ tmlg() {
   tmux select-layout "0: ~* (3 panes) [203x48] [layout 20b5,203x48,0,0{90x48,0,0[90x24,0,0,0,90x23,0,25,2],112x48,91,0,1}] @0 (active) 1: ~- (3 panes) [203x48] [layout 7f94,203x48,0,0[203x24,0,0{101x24,0,0,3,101x24,102,0,6},203x23,0,25,5]] @1"
 }
 
-newbr() {
+gtrack() {
   git fetch
   git branch --track $1 origin/$1
   git checkout $1
@@ -279,3 +281,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # added by travis gem
 [ -f /Users/darin/.travis/travis.sh ] && source /Users/darin/.travis/travis.sh
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
