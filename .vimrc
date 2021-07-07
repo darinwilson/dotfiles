@@ -72,6 +72,9 @@ Plugin 'szw/vim-dict'
 Plugin 'mhartington/oceanic-next'
 Plugin 'albertorestifo/github.vim'
 
+" show colors in CSS files
+Plugin 'chrisbra/Colorizer'
+
 " these are all for snipMate
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -269,4 +272,7 @@ endfunction
 
 map <leader>t :call CmdToTmux()<CR>
 map <leader>rt :wa<CR>:call RunLastCmdToTmux()<CR>
+
+" colorizer
+let g:colorizer_auto_filetype='css,html,scss,sass'
 

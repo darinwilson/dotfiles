@@ -113,7 +113,7 @@ alias gaa='git add -A'
 alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2020\ Project/mixes'
+alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2021\ Project/mixes'
 alias cdds='cd ~/work/donorstack/src/lupine'
 alias cdfm='cd ~/work/ir/freshmac/FreshmacBackend'
 alias cdvs="cd ~/files/music/live/sets/Variety\ Show\ 2020\ Project"
@@ -125,6 +125,7 @@ alias ss='spring stop'
 # node
 alias npmwtf='rm -rf ./node_modules && npm install'
 alias rnwtf='watchman watch-del-all && rm -rf ./node_modules && npm install && npm start -- --reset-cache'
+alias nr='npm run'
 
 # link
 #source ~/.linkdevrc
@@ -193,7 +194,7 @@ export SVN_EDITOR=nvim
 export WEBKIT=true
 
 vimgem() {
-  gemdir=`bundle info $1`
+  gemdir=`bundle info $1 | sed -n 's/.*Path: //p'`
   vim -c "cd $gemdir"
 }
 
@@ -285,3 +286,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 . $HOME/.asdf/asdf.sh
 
 . $HOME/.asdf/completions/asdf.bash
+
+
+
