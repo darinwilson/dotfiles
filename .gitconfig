@@ -1,0 +1,19 @@
+[user]
+	name = Darin Wilson
+	email = darinwilson@gmail.com
+[credential]
+	helper = osxkeychain
+[color]
+  ui=auto
+[alias]
+  l = "!. ~/.githelpers && pretty_git_log"
+
+[core]
+	editor = NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim
+	autocrlf = input
+[url "https://github.com"]
+	insteadOf = git://github.com
+[pager]
+	branch = false
+[init]
+	defaultBranch = main
