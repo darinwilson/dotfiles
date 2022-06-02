@@ -116,6 +116,7 @@ alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2022\ Project/mixes'
 # ruby/rails
 alias be='bundle exec'
 alias ss='spring stop'
+alias vimgem='bundle open'
 
 # node
 alias npmwtf='rm -rf ./node_modules && npm install'
@@ -177,11 +178,6 @@ alias ixm='iex -S mix'
 # pyenv config
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
-
-vimgem() {
-  gemdir=`bundle info $1 | sed -n 's/.*Path: //p'`
-  vim -c "cd $gemdir"
-}
 
 vimdep() {
   vim -c "cd deps/$1"
