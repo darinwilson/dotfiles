@@ -232,36 +232,11 @@ rdb() {
   fi
 }
 
-function versions() {
-  local POSTGRES_USED=$(grep -E '\bpg\b' Gemfile | grep -Ev '^\s*#')
-  echo "### Installed Versions ###"
-  ruby --version
-  rails --version
-  [[ -n $POSTGRES_USED ]] && psql --version
-  echo
-
-  echo "### Target Versions ###"
-  echo "# Ruby #"
-  echo "2.6*"
-  echo "2.5 → 2.5.1"
-  echo "2.4 → 2.4.4"
-  echo "2.3 → 2.3.7"
-  echo "2.2 → 2.2.10: EOL"
-  echo "# Rails #"
-  echo "5 → 5.2.0"
-  echo "4 → 4.2.10"
-  echo "3 → 3.2.22.5"
-  call_function_if_it_exists project_versions
-}
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # added by travis gem
 [ -f /Users/darin/.travis/travis.sh ] && source /Users/darin/.travis/travis.sh
 
-. $HOME/.asdf/asdf.sh
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-. $HOME/.asdf/completions/asdf.bash
-
-
-
+eval "$(rbenv init - zsh)"
