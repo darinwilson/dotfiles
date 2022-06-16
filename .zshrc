@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -156,9 +156,6 @@ source ~/.awsrc
 
 # petaluma map
 source ~/.aws_env
-
-# slack token (for Slack CLI)
-source ~/.slack-token
 
 # server info
 source ~/.servers
