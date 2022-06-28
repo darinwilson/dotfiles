@@ -1,26 +1,3 @@
--- following options are the default
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
---vim.g.nvim_tree_icons = {
---  default = "",
---  symlink = "",
---  git = {
---    unstaged = "",
---    staged = "S",
---    unmerged = "",
---    renamed = "➜",
---    deleted = "",
---    untracked = "U",
---    ignored = "◌",
---  },
---  folder = {
---    default = "",
---    open = "",
---    empty = "",
---    empty_open = "",
---    symlink = "",
---  },
---}
-
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
   return
@@ -34,41 +11,59 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
-  diagnostics = {
-    enable = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    },
-  },
   renderer = {
+    root_folder_modifier = ":t",
     icons = {
       glyphs = {
-        default = "",
+        default = "",
         symlink = "",
-        git = {
-          unstaged = "",
-          staged = "S",
-          unmerged = "",
-          renamed = "➜",
-          deleted = "",
-          untracked = "U",
-          ignored = "◌",
-        },
         folder = {
+          arrow_open = "",
+          arrow_closed = "",
           default = "",
           open = "",
           empty = "",
           empty_open = "",
           symlink = "",
+          symlink_open = "",
         },
-      }
-    }
-  }
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "U",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
+    },
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
+  view = {
+    width = 30,
+    height = 30,
+    side = "left",
+    mappings = {
+      list = {
+        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+        { key = "h", cb = tree_cb "close_node" },
+        { key = "v", cb = tree_cb "vsplit" },
+      },
+    },
+  },
 }
 
+-- DMWHACK
 -- resize pane when opening tree
 g_tree_is_open = false
 toggle_tree_and_resize = function ()

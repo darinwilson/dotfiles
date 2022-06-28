@@ -134,7 +134,7 @@ brew-info() { brew info $@ | grep -Eo "^https?://[^[:space:]]+" | xargs open }
 alias psql='psql -P pager'
 
 # java
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+#export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 
 # android
 export ANDROID_HOME=/Users/darin/Library/Android/sdk
