@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -122,6 +122,9 @@ alias vimgem='bundle open'
 alias npmwtf='rm -rf ./node_modules && npm install'
 alias rnwtf='watchman watch-del-all && rm -rf ./node_modules && npm install && npm start -- --reset-cache'
 alias nr='npm run'
+
+# jekyll
+alias jsrv='bundle exec jekyll serve'
 
 # open website for brew package
 brew-info() { brew info $@ | grep -Eo "^https?://[^[:space:]]+" | xargs open }

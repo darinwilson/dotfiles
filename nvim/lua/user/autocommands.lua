@@ -45,3 +45,10 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
   end,
 })
+
+-- DMWHACK
+vim.cmd [[
+  autocmd BufWritePre * :%s/\s\+$//e
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+]]
+
