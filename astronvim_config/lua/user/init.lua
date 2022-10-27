@@ -9,7 +9,7 @@ local config = {
   -- Configure AstroNvim updates
   updater = {
     remote = "origin", -- remote to use
-    channel = "nightly", -- "stable" or "nightly"
+    channel = "stable", -- "stable" or "nightly"
     version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
     branch = "main", -- branch name (NIGHTLY ONLY)
     commit = nil, -- commit hash (NIGHTLY ONLY)
@@ -26,28 +26,38 @@ local config = {
   },
 
   -- Set colorscheme to use
-  colorscheme = "default_theme",
+  colorscheme = "OceanicNext",
 
-  -- Override highlight groups in any theme
+  -- Add highlight groups in any theme
   highlights = {
-    -- duskfox = { -- a table of overrides/changes to the default
+    -- init = { -- this table overrides highlights in all themes
+    --   Normal = { bg = "#000000" },
+    -- }
+    -- duskfox = { -- a table of overrides/changes to the duskfox theme
     --   Normal = { bg = "#000000" },
     -- },
-    default_theme = function(highlights) -- or a function that returns a new table of colors to set
-      local C = require "default_theme.colors"
-
-      highlights.Normal = { fg = C.fg, bg = C.bg }
-      return highlights
-    end,
   },
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
     opt = {
+      -- set to true or false etc.
       relativenumber = true, -- sets vim.opt.relativenumber
+      number = true, -- sets vim.opt.number
+      spell = false, -- sets vim.opt.spell
+      signcolumn = "auto", -- sets vim.opt.signcolumn to auto
+      wrap = true, -- sets vim.opt.wrap
+      undofile = false, -- don't enable persistent undo
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
+      autoformat_enabled = false, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+      cmp_enabled = true, -- enable completion at start
+      autopairs_enabled = true, -- enable autopairs at start
+      diagnostics_enabled = true, -- enable diagnostics at start
+      status_diagnostics_enabled = true, -- enable diagnostics in statusline
+      icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+      ruby_host_prog = "/Users/darin/.rbenv/versions/3.1.2/bin/neovim-ruby-host",
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -77,18 +87,30 @@ local config = {
 
   -- Default theme configuration
   default_theme = {
-    -- set the highlight style for diagnostic messages
-    diagnostics_style = { italic = true },
     -- Modify the color palette for the default theme
-    colors = {
-      fg = "#abb2bf",
-      bg = "#1e222a",
-    },
+    -- colors = {
+    --   fg = "#abb2bf",
+    --   bg = "#1e222a",
+    -- },
+    -- highlights = function(hl) -- or a function that returns a new table of colors to set
+    --   local C = require "default_theme.colors"
+
+    --   hl.Normal = { fg = C.fg, bg = C.bg }
+
+      -- New approach instead of diagnostic_style
+    --   hl.DiagnosticError.italic = true
+    --   hl.DiagnosticHint.italic = true
+    --   hl.DiagnosticInfo.italic = true
+    --   hl.DiagnosticWarn.italic = true
+
+    --   return hl
+    -- end,
     -- enable or disable highlighting for extra plugins
     plugins = {
       aerial = true,
       beacon = false,
       bufferline = true,
+      cmp = true,
       dashboard = true,
       highlighturl = true,
       hop = false,
@@ -101,14 +123,15 @@ local config = {
       rainbow = true,
       symbols_outline = false,
       telescope = true,
+      treesitter = true,
       vimwiki = false,
       ["which-key"] = true,
     },
   },
 
-  -- Diagnostics configuration (for vim.diagnostics.config({...}))
+  -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
-    virtual_text = true,
+    virtual_text = false,
     underline = true,
   },
 
@@ -117,6 +140,25 @@ local config = {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+    },
+    formatting = {
+      -- control auto formatting on save
+      format_on_save = {
+        enabled = true, -- enable or disable format on save globally
+        allow_filetypes = { -- enable format on save for specified filetypes only
+          -- "go",
+        },
+        ignore_filetypes = { -- disable format on save for specified filetypes
+          -- "python",
+        },
+      },
+      disabled = { -- disable formatting capabilities for the listed language servers
+        "sumneko_lua",
+      },
+      timeout_ms = 1000, -- default format timeout
+      -- filter = function(client) -- fully override the default formatting function
+      --   return true
+      -- end
     },
     -- easily add or disable built in mappings added during LSP attaching
     mappings = {
@@ -147,12 +189,6 @@ local config = {
       --     },
       --   },
       -- },
-      -- Example disabling formatting for a specific language server
-      -- gopls = { -- override table for require("lspconfig").gopls.setup({...})
-      --   on_attach = function(client, bufnr)
-      --     client.resolved_capabilities.document_formatting = false
-      --   end
-      -- }
     },
   },
 
@@ -170,8 +206,35 @@ local config = {
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
-      -- quick save
-      -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+
+	  -- quick save
+	  ["<C-s>"] = { ":w!<cr>", desc = "Save File" },
+
+	  -- closing buffers
+	  ["<leader>w"] = { ":bd<CR>", desc = "Close buffer" },
+	  ["<leader>W"] = { ":bufdo bd<CR>", desc = "Close all buffers" },
+
+	  -- reset tslime settings
+	  ["rst"] = { ":unlet g:tslime<CR>", desc = "Reset tslime settings" },
+
+	  -- testing
+	  ["<leader>f"] = { ":TestFile<CR>", desc = "Test current file" },
+	  ["<leader>s"] = { ":TestNearest<CR>", desc = "Test nearest" },
+	  ["<leader>tl"] = { ":TestLast<CR>", desc = "Run last test" },
+	  ["<leader>a"] = { ":TestSuite<CR>", desc = "Run full test suite" },
+
+	  -- open most recent Capybara screenshot
+	  ["<leader>ss"] = { ":silent !open `ls -t tmp/capybara/*.png | head -n1` <cr>", desc = "Open most recent capybara screenshot" },
+
+	  -- toggle indent lines
+	  ["<leader>il"] = { ":IndentBlanklineToggle<cr>", desc = "Toggle indent lines" },
+
+	  -- open current project in Github
+	  ["<leader>gb"] = { ":!gh<CR>", desc = "Open current project in Github" },
+    },
+    i = {
+	  -- quick save in insert
+	  ["<C-s>"] = { "<esc>:w!<cr>", desc = "Save File" },
     },
     t = {
       -- setting a mapping to false will disable it
@@ -182,6 +245,14 @@ local config = {
   -- Configure plugins
   plugins = {
     init = {
+	  -- my colorscheme
+	  { "darinwilson/oceanic-next" },
+
+	  -- tmux
+	  { "jgdavey/tslime.vim", commit = "9b2b99e409336584103b83c597fdb6234875ae25" },
+
+	  -- testing
+	  { "janko-m/vim-test", commit = "2da8d59fdc46d1af7b7105a578d1ace3924d1a7b" },
       -- You can disable default plugins as follows:
       -- ["goolord/alpha-nvim"] = { disable = true },
 
@@ -206,43 +277,37 @@ local config = {
     },
     -- All other entries override the require("<key>").setup({...}) call for default plugins
     ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
-      -- config variable is the default configuration table for the setup functino call
-      local null_ls = require "null-ls"
+      -- config variable is the default configuration table for the setup function call
+      -- local null_ls = require "null-ls"
+
       -- Check supported formatters and linters
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
       config.sources = {
         -- Set a formatter
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettier,
+        -- null_ls.builtins.formatting.stylua,
+        -- null_ls.builtins.formatting.prettier,
       }
-      -- set up null-ls's on_attach function
-      -- NOTE: You can remove this on attach function to disable format on save
-      config.on_attach = function(client)
-        if client.resolved_capabilities.document_formatting then
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            desc = "Auto format before save",
-            pattern = "<buffer>",
-            callback = vim.lsp.buf.formatting_sync,
-          })
-        end
-      end
-      return config -- return final config table to use in require("null-ls").setup(config)
+      return config -- return final config table
     end,
     treesitter = { -- overrides `require("treesitter").setup(...)`
-      ensure_installed = { "lua" },
+      -- ensure_installed = { "lua" },
     },
     -- use mason-lspconfig to configure LSP installations
     ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
-      ensure_installed = { "sumneko_lua" },
+      -- ensure_installed = { "sumneko_lua" },
     },
-    -- use mason-tool-installer to configure DAP/Formatters/Linter installation
-    ["mason-tool-installer"] = { -- overrides `require("mason-tool-installer").setup(...)`
-      ensure_installed = { "prettier", "stylua" },
+    -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
+    ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
+      -- ensure_installed = { "prettier", "stylua" },
     },
-    packer = { -- overrides `require("packer").setup(...)`
-      compile_path = vim.fn.stdpath "data" .. "/packer_compiled.lua",
-    },
+    cmp = {
+      window = {
+        completion = {
+          border = { '', '', '', '', '', '', '', '' }
+        },
+      }
+    }
   },
 
   -- LuaSnip Options
@@ -251,7 +316,7 @@ local config = {
     vscode_snippet_paths = {},
     -- Extend filetypes
     filetype_extend = {
-      javascript = { "javascriptreact" },
+      -- javascript = { "javascriptreact" },
     },
   },
 
@@ -273,7 +338,7 @@ local config = {
   -- Modify which-key registration (Use this with mappings table in the above.)
   ["which-key"] = {
     -- Add bindings which show up as group name
-    register_mappings = {
+    register = {
       -- first key is the mode, n == normal mode
       n = {
         -- second key is the prefix, <leader> prefixes
@@ -290,15 +355,12 @@ local config = {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    -- Set key binding
-    -- Set autocommands
-    vim.api.nvim_create_augroup("packer_conf", { clear = true })
-    vim.api.nvim_create_autocmd("BufWritePost", {
-      desc = "Sync packer after modifying plugins.lua",
-      group = "packer_conf",
-      pattern = "plugins.lua",
-      command = "source <afile> | PackerSync",
-    })
+    vim.cmd([[let test#strategy = "tslime"]])
+    vim.cmd([[highlight IndentBlanklineChar guifg=#343d46 gui=nocombine]])
+    vim.cmd([[highlight IndentBlanklineContextChar guifg=#65737e gui=nocombine]])
+
+    -- custom snippets
+    require("luasnip.loaders.from_snipmate").lazy_load()
 
     -- Set up custom filetypes
     -- vim.filetype.add {
