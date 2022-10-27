@@ -1,9 +1,8 @@
---              AstroNvim Configuration Table
--- All configuration changes should go inside of the table below
+-- Custom config for AstroNvim 2.x
+-- this version strips out a lot of examples and documentation that came with
+-- the file this was copied from, but the original still exists in
+-- ~/.config/lua/user_example/init.lua
 
--- You can think of a Lua "table" as a dictionary like data structure the
--- normal format is "key = value". These also handle array like data structures
--- where a value with no key simply has an implicit numeric key
 local config = {
 
   -- Configure AstroNvim updates
@@ -18,25 +17,10 @@ local config = {
     show_changelog = true, -- show the changelog after performing an update
     auto_reload = false, -- automatically reload and sync packer after a successful update
     auto_quit = false, -- automatically quit the current session after a successful update
-    -- remotes = { -- easily add new remotes to track
-    --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
-    --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
-    --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
-    -- },
   },
 
   -- Set colorscheme to use
   colorscheme = "OceanicNext",
-
-  -- Add highlight groups in any theme
-  highlights = {
-    -- init = { -- this table overrides highlights in all themes
-    --   Normal = { bg = "#000000" },
-    -- }
-    -- duskfox = { -- a table of overrides/changes to the duskfox theme
-    --   Normal = { bg = "#000000" },
-    -- },
-  },
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
@@ -60,15 +44,6 @@ local config = {
       ruby_host_prog = "/Users/darin/.rbenv/versions/3.1.2/bin/neovim-ruby-host",
     },
   },
-  -- If you need more control, you can use the function()...end notation
-  -- options = function(local_vim)
-  --   local_vim.opt.relativenumber = true
-  --   local_vim.g.mapleader = " "
-  --   local_vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' } -- removing option from list
-  --   local_vim.opt.shortmess = vim.opt.shortmess + { I = true } -- add to option list
-  --
-  --   return local_vim
-  -- end,
 
   -- Set dashboard header
   header = {
@@ -87,24 +62,6 @@ local config = {
 
   -- Default theme configuration
   default_theme = {
-    -- Modify the color palette for the default theme
-    -- colors = {
-    --   fg = "#abb2bf",
-    --   bg = "#1e222a",
-    -- },
-    -- highlights = function(hl) -- or a function that returns a new table of colors to set
-    --   local C = require "default_theme.colors"
-
-    --   hl.Normal = { fg = C.fg, bg = C.bg }
-
-      -- New approach instead of diagnostic_style
-    --   hl.DiagnosticError.italic = true
-    --   hl.DiagnosticHint.italic = true
-    --   hl.DiagnosticInfo.italic = true
-    --   hl.DiagnosticWarn.italic = true
-
-    --   return hl
-    -- end,
     -- enable or disable highlighting for extra plugins
     plugins = {
       aerial = true,
@@ -156,39 +113,12 @@ local config = {
         "sumneko_lua",
       },
       timeout_ms = 1000, -- default format timeout
-      -- filter = function(client) -- fully override the default formatting function
-      --   return true
-      -- end
     },
     -- easily add or disable built in mappings added during LSP attaching
     mappings = {
       n = {
         -- ["<leader>lf"] = false -- disable formatting keymap
       },
-    },
-    -- add to the global LSP on_attach function
-    -- on_attach = function(client, bufnr)
-    -- end,
-
-    -- override the mason server-registration function
-    -- server_registration = function(server, opts)
-    --   require("lspconfig")[server].setup(opts)
-    -- end,
-
-    -- Add overrides for LSP server settings, the keys are the name of the server
-    ["server-settings"] = {
-      -- example for addings schemas to yamlls
-      -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
-      --   settings = {
-      --     yaml = {
-      --       schemas = {
-      --         ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*.{yml,yaml}",
-      --         ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-      --         ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
-      --       },
-      --     },
-      --   },
-      -- },
     },
   },
 
@@ -253,27 +183,6 @@ local config = {
 
 	  -- testing
 	  { "janko-m/vim-test", commit = "2da8d59fdc46d1af7b7105a578d1ace3924d1a7b" },
-      -- You can disable default plugins as follows:
-      -- ["goolord/alpha-nvim"] = { disable = true },
-
-      -- You can also add new plugins here as well:
-      -- Add plugins, the packer syntax without the "use"
-      -- { "andweeb/presence.nvim" },
-      -- {
-      --   "ray-x/lsp_signature.nvim",
-      --   event = "BufRead",
-      --   config = function()
-      --     require("lsp_signature").setup()
-      --   end,
-      -- },
-
-      -- We also support a key value style plugin definition similar to NvChad:
-      -- ["ray-x/lsp_signature.nvim"] = {
-      --   event = "BufRead",
-      --   config = function()
-      --     require("lsp_signature").setup()
-      --   end,
-      -- },
     },
     -- All other entries override the require("<key>").setup({...}) call for default plugins
     ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
@@ -361,19 +270,6 @@ local config = {
 
     -- custom snippets
     require("luasnip.loaders.from_snipmate").lazy_load()
-
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
   end,
 }
 
