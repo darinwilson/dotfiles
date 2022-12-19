@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.node/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -117,11 +117,13 @@ alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2022\ Project/mixes'
 alias be='bundle exec'
 alias ss='spring stop'
 alias vimgem='bundle open'
+alias killpuma='ps | grep puma | grep -v "grep" | cut -f 1 -d " " | xargs kill -9'
 
 # node
 alias npmwtf='rm -rf ./node_modules && npm install'
 alias rnwtf='watchman watch-del-all && rm -rf ./node_modules && npm install && npm start -- --reset-cache'
 alias nr='npm run'
+export N_PREFIX="$HOME/.node"
 
 # jekyll
 alias jsrv='bundle exec jekyll serve'
@@ -206,7 +208,10 @@ flushdns() {
 
 # Rails shortcuts that are backwards compatible
 rsrv() {
-  if [ -e "bin/rails" ]
+  if [ -e "bin/dev" ]
+  then
+    bin/dev
+  elif [ -e "bin/rails" ]
   then
     bin/rails s
   else
