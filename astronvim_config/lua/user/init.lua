@@ -216,7 +216,22 @@ local config = {
           border = { '', '', '', '', '', '', '', '' }
         },
       }
-    }
+     },
+    telescope = {
+      defaults = {
+        layout_strategy = "vertical", -- change this and tweak defaults
+        layout_config = {
+          vertical = {
+            prompt_position = "top",
+            mirror = true,
+            preview_cutoff = 40,
+            preview_height = 0.5,
+          },
+          width = 0.95,
+          height = 0.95,
+        },
+      },
+    },
   },
 
   -- LuaSnip Options

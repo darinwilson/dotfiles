@@ -111,13 +111,13 @@ alias gaa='git add -A'
 alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/live/sets/Song-A-Day\ 2022\ Project/mixes'
+alias cdsad='cd ~/files/music/live/sets/bedtime\ stories\ Project/mixes/Song-A-Day\ 2023'
 
 # ruby/rails
 alias be='bundle exec'
 alias ss='spring stop'
 alias vimgem='bundle open'
-alias killpuma='ps | grep puma | grep -v "grep" | cut -f 1 -d " " | xargs kill -9'
+alias killpuma='ps | grep puma | grep -v "grep" | cut -f 2 -d " " | xargs kill -9'
 
 # node
 alias npmwtf='rm -rf ./node_modules && npm install'
@@ -245,3 +245,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 eval "$(rbenv init - zsh)"
+
+# launch associated tmux session if we're in VS Code
+if [ $TERM_PROGRAM = "vscode" ]
+then
+  vscode_tmux_launch
+fi
+

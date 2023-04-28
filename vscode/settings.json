@@ -1,0 +1,98 @@
+{
+    /***********************************
+     * New Settings
+     ***********************************/
+    /**
+      * Better Defaults
+      **/
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": false,
+    "editor.copyWithSyntaxHighlighting": false,
+    "editor.emptySelectionClipboard": false,
+    "editor.formatOnSave": false,
+    "editor.guides.highlightActiveIndentation": false,
+    "editor.guides.indentation": false,
+    "editor.inlineSuggest.enabled": true,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "window.nativeFullScreen": false,
+    "window.newWindowDimensions": "inherit",
+    "window.zoomLevel": 1,
+    "workbench.activityBar.visible": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.showTabs": false,
+    "workbench.panel.defaultLocation": "left",
+    "workbench.sideBar.location": "right",
+    "workbench.startupEditor": "none",
+    "workbench.statusBar.visible": false,
+
+
+    /**
+     * Typeography
+     */
+     "editor.fontFamily": "'SauceCodePro Nerd Font'",
+     "editor.fontSize": 12,
+     "editor.letterSpacing": -0.5,
+     "editor.wordWrap": "on",
+
+
+    /**
+     * Look and feel
+     */
+    "workbench.colorTheme": "Oceanic Next",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#152027",
+        "statusBar.noFolderBackground": "#152027",
+        "statusBar.debuggingBackground": "#152027"
+    },
+    "workbench.iconTheme": "vscode-icons",
+
+
+    /**
+     * Terminal
+     */
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.fontFamily": "SauceCodePro Nerd Font",
+    "terminal.integrated.letterSpacing": 0.5,
+    "terminal.integrated.macOptionClickForcesSelection": true,
+
+
+    /**
+     * Neovim
+     */
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+
+
+    /**
+     * Ruby
+     */
+    "[ruby]": {
+       "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
+    },
+    "ruby.interpreter.commandPath": "~/.rbenv/versions/3.1.2/bin/ruby",
+    "ruby.pathToBundler": "~/.rbenv/versions/3.1.2/bin/bundle",
+    "ruby.lint": {
+        "standard": {
+            "command": "~/.rbenv/versions/3.1.2/bin/standard",
+        }
+    },
+    "ruby.format": "standard",
+    "solargraph.bundlerPath": "/Users/darin/.rbenv/versions/3.1.2/bin/bundle",
+    "solargraph.commandPath": "/Users/darin/.rbenv/versions/3.1.2/bin/solargraph",
+    "solargraph.diagnostics": true,
+    "standardRuby.autofix": false,
+    "standardRuby.commandPath": "${userHome}/.rbenv/shims/standardrb",
+}
