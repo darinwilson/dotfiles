@@ -1,4 +1,4 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Place your key bindings in this file to override the defaults
 [
     /********************
      * New keybindings
@@ -40,47 +40,8 @@
     },
 
     /**
-     * File Explorer
+     * Dropdown navigation
      **/
-    {
-        "key": "cmd+d",
-        "command": "duplicate.execute",
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
-    },
-    {
-        "key": "cmd+n",
-        "command": "explorer.newFile",
-        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-    {
-        "key": "shift+cmd+n",
-        "command": "explorer.newFolder",
-        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-
-    /**
-     * Neovim
-     */
-    {
-        "command": "vscode-neovim.compositeEscape1",
-        "key": "j",
-        "when": "neovim.mode == insert && editorTextFocus",
-        "args": "j"
-    }
-
-
-    /********************
-     * Old keybindings
-     ********************/
-    {
-        "key": "ctrl+alt+h",
-        "command": "workbench.action.terminal.focus"
-    },
-    {
-        "key": "ctrl+alt+l",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when": "terminalFocus"
-    },
     {
         "key": "ctrl+j",
         "command": "selectNextSuggestion",
@@ -105,5 +66,52 @@
         "key": "ctrl+j",
         "command": "workbench.action.quickOpenSelectNext",
         "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.panel.interactiveSessionSidebar.copilot"
+    },
+
+    /**
+     * File Explorer
+     **/
+    {
+        "key": "cmd+d",
+        "command": "duplicate.execute",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+    },
+    {
+        "key": "cmd+n",
+        "command": "explorer.newFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "shift+cmd+n",
+        "command": "explorer.newFolder",
+        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+    },
+
+    /**
+     * Copilot
+     */
+    {
+        "key": "cmd+u",
+        "command": "workbench.action.chat.startVoiceChat",
+        "when": "!voiceChatInProgress"
+    },
+    {
+        "key": "cmd+u",
+        "command": "workbench.action.chat.stopListeningAndSubmit",
+        "when": "voiceChatInProgress"
+    },
+    {
+        "key": "ctrl+w q",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "!editorTextFocus && !filesExplorerFocus && !searchViewletFocus && !terminalFocus && neovim.mode != 'cmdline'"
+    },
+    {
+        "key": "ctrl+w q",
+        "command": "-workbench.action.closeActiveEditor",
+        "when": "!editorTextFocus && !filesExplorerFocus && !searchViewletFocus && !terminalFocus && neovim.mode != 'cmdline'"
     }
 ]

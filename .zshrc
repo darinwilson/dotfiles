@@ -60,7 +60,7 @@ export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.n
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -71,6 +71,9 @@ export EDITOR='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export NLS_LANG=$LANG
+
+# need this for ERSO
+export USE_MAILCATCHER=yes
 
 ####################################################################
 ## Customizations
@@ -88,8 +91,9 @@ alias tma="tmux attach-session -t"
 alias tmls="tmux list-sessions"
 
 # vim
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
+alias nvim="/Users/darin/work/oss/neovim/nvim-macos-arm64/bin/nvim"
+#export NVIM_TUI_ENABLE_TRUE_COLOR=1
+#alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias vi="nvim"
 
 # Disable flow control commands (keeps C-s from freezing everything)
@@ -109,15 +113,25 @@ alias gbr='git branch'
 alias gstapp='git stash pop'
 alias gaa='git add -A'
 alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
+unalias gl
+alias gl='git config --get remote.origin.url | ruby -ne "puts %{https://gitlab.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}" | xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/live/sets/bedtime\ stories\ Project/mixes/Song-A-Day\ 2023'
+alias cdsad='cd ~/files/music/Song-A-Day\ 2024'
 
 # ruby/rails
 alias be='bundle exec'
 alias ss='spring stop'
 alias vimgem='bundle open'
-alias killpuma='ps | grep puma | grep -v "grep" | cut -f 2 -d " " | xargs kill -9'
+alias killpuma='ps | grep puma | grep -v "grep" | cut -f 1 -d " " | xargs kill -9'
+alias rta='bin/rails test:all'
+alias rsp='bundle exec rspec'
+alias rspff='bundle exec rspec --fail-fast'
+
+# kamal
+alias kmd='bin/kamal deploy'
+alias kms='bin/kamal shell'
+alias kmc='bin/kamal console'
 
 # node
 alias npmwtf='rm -rf ./node_modules && npm install'
@@ -140,10 +154,13 @@ alias psql='psql -P pager'
 
 # java
 #export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/bin:$PATH
+
 
 # android
 export ANDROID_HOME=/Users/darin/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$JAVA_HOME/bin:$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # ios
 alias iosim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
@@ -180,6 +197,9 @@ alias ixm='iex -S mix'
 # pyenv config
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
+
+# docker
+alias dcu='docker-compose up'
 
 vimdep() {
   vim -c "cd deps/$1"
@@ -222,9 +242,9 @@ rsrv() {
 rirb() {
   if [ -e "bin/rails" ]
   then
-    bin/rails c
+    bin/rails c $1
   else
-    be rails c
+    be rails c $1
   fi
 }
 
@@ -252,3 +272,8 @@ then
   vscode_tmux_launch
 fi
 
+. "$HOME/.asdf/asdf.sh"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+[ -f "/Users/darin/.ghcup/env" ] && . "/Users/darin/.ghcup/env" # ghcup-env

@@ -23,8 +23,6 @@
     "files.trimTrailingWhitespace": true,
     "window.nativeFullScreen": false,
     "window.newWindowDimensions": "inherit",
-    "window.zoomLevel": 1,
-    "workbench.activityBar.visible": false,
     "workbench.editor.enablePreview": false,
     "workbench.editor.showTabs": false,
     "workbench.panel.defaultLocation": "left",
@@ -34,12 +32,13 @@
 
 
     /**
-     * Typeography
+     * Typeography - zoomLevel changes the font size of the workbench screens
      */
      "editor.fontFamily": "'SauceCodePro Nerd Font'",
-     "editor.fontSize": 12,
+     "editor.fontSize": 14,
      "editor.letterSpacing": -0.5,
      "editor.wordWrap": "on",
+     "editor.zoomLevel": "0.75",
 
 
     /**
@@ -52,6 +51,7 @@
         "statusBar.debuggingBackground": "#152027"
     },
     "workbench.iconTheme": "vscode-icons",
+    "fonted.font": "SauceCodePro Nerd Font",
 
 
     /**
@@ -63,6 +63,7 @@
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.fontFamily": "SauceCodePro Nerd Font",
+    "terminal.integrated.fontSize": 14,
     "terminal.integrated.letterSpacing": 0.5,
     "terminal.integrated.macOptionClickForcesSelection": true,
 
@@ -95,4 +96,5 @@
     "solargraph.diagnostics": true,
     "standardRuby.autofix": false,
     "standardRuby.commandPath": "${userHome}/.rbenv/shims/standardrb",
+    "workbench.activityBar.visible": false,
 }
