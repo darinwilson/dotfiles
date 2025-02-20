@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.node/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/mysql/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.node/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -117,7 +117,7 @@ unalias gl
 alias gl='git config --get remote.origin.url | ruby -ne "puts %{https://gitlab.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}" | xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/Song-A-Day\ 2024'
+alias cdsad='cd ~/files/music/Song-A-Day\ 2025'
 
 # ruby/rails
 alias be='bundle exec'
@@ -269,7 +269,7 @@ eval "$(rbenv init - zsh)"
 # launch associated tmux session if we're in VS Code
 if [ $TERM_PROGRAM = "vscode" ]
 then
-  vscode_tmux_launch
+  #vscode_tmux_launch
 fi
 
 . "$HOME/.asdf/asdf.sh"

@@ -1,100 +1,110 @@
 {
-    /***********************************
+  /***********************************
      * New Settings
      ***********************************/
-    /**
+  /**
       * Better Defaults
       **/
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.renderSideBySide": false,
-    "editor.copyWithSyntaxHighlighting": false,
-    "editor.emptySelectionClipboard": false,
-    "editor.formatOnSave": false,
-    "editor.guides.highlightActiveIndentation": false,
-    "editor.guides.indentation": false,
-    "editor.inlineSuggest.enabled": true,
-    "editor.lineNumbers": "relative",
-    "editor.minimap.enabled": false,
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.snippetSuggestions": "top",
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "window.nativeFullScreen": false,
-    "window.newWindowDimensions": "inherit",
-    "workbench.editor.enablePreview": false,
-    "workbench.editor.showTabs": false,
-    "workbench.panel.defaultLocation": "left",
-    "workbench.sideBar.location": "right",
-    "workbench.startupEditor": "none",
-    "workbench.statusBar.visible": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.emptySelectionClipboard": false,
+  "editor.formatOnSave": false,
+  "editor.guides.highlightActiveIndentation": false,
+  "editor.guides.indentation": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.snippetSuggestions": "top",
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "window.nativeFullScreen": false,
+  "window.newWindowDimensions": "inherit",
+  "workbench.editor.showTabs": "single",
+  "workbench.panel.defaultLocation": "left",
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "extensions.ignoreRecommendations": true,
 
-
-    /**
+  /**
      * Typeography - zoomLevel changes the font size of the workbench screens
      */
-     "editor.fontFamily": "'SauceCodePro Nerd Font'",
-     "editor.fontSize": 14,
-     "editor.letterSpacing": -0.5,
-     "editor.wordWrap": "on",
-     "editor.zoomLevel": "0.75",
+  "editor.fontFamily": "SauceCodePro Nerd Font",
+  "editor.fontSize": 14,
+  "editor.letterSpacing": 0,
+  "editor.wordWrap": "on",
 
-
-    /**
+  /**
      * Look and feel
      */
-    "workbench.colorTheme": "Oceanic Next",
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#152027",
-        "statusBar.noFolderBackground": "#152027",
-        "statusBar.debuggingBackground": "#152027"
-    },
-    "workbench.iconTheme": "vscode-icons",
-    "fonted.font": "SauceCodePro Nerd Font",
+  "workbench.colorTheme": "Oceanic Next",
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#152027",
+    "statusBar.noFolderBackground": "#152027",
+    "statusBar.debuggingBackground": "#152027"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "fonted.font": "SauceCodePro Nerd Font",
 
-
-    /**
+  /**
      * Terminal
      */
-    "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.defaultLocation": "editor",
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.drawBoldTextInBrightColors": false,
-    "terminal.integrated.enableMultiLinePasteWarning": false,
-    "terminal.integrated.fontFamily": "SauceCodePro Nerd Font",
-    "terminal.integrated.fontSize": 14,
-    "terminal.integrated.letterSpacing": 0.5,
-    "terminal.integrated.macOptionClickForcesSelection": true,
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.defaultLocation": "editor",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.fontFamily": "SauceCodePro Nerd Font",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.letterSpacing": 0.5,
+  "terminal.integrated.macOptionClickForcesSelection": true,
 
-
-    /**
-     * Neovim
+  /**
+     * Neovim and stuff
      */
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "vscode-neovim.neovimExecutablePaths.darwin": "/Users/darin/work/oss/neovim/nvim-macos-arm64/bin/nvim",
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    }
+  },
 
-
-    /**
+  /**
      * Ruby
      */
-    "[ruby]": {
-       "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
-    },
-    "ruby.interpreter.commandPath": "~/.rbenv/versions/3.1.2/bin/ruby",
-    "ruby.pathToBundler": "~/.rbenv/versions/3.1.2/bin/bundle",
-    "ruby.lint": {
-        "standard": {
-            "command": "~/.rbenv/versions/3.1.2/bin/standard",
-        }
-    },
-    "ruby.format": "standard",
-    "solargraph.bundlerPath": "/Users/darin/.rbenv/versions/3.1.2/bin/bundle",
-    "solargraph.commandPath": "/Users/darin/.rbenv/versions/3.1.2/bin/solargraph",
-    "solargraph.diagnostics": true,
-    "standardRuby.autofix": false,
-    "standardRuby.commandPath": "${userHome}/.rbenv/shims/standardrb",
-    "workbench.activityBar.visible": false,
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "rubyLsp.linters": [
+    "standard"
+  ],
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "rbenv"
+  },
+  "rubyLsp.enabledFeatures": {
+    "codeActions": true,
+    "diagnostics": false,
+    "documentHighlights": true,
+    "documentLink": true,
+    "documentSymbols": true,
+    "foldingRanges": true,
+    "formatting": false,
+    "hover": true,
+    "inlayHint": true,
+    "onTypeFormatting": true,
+    "selectionRanges": true,
+    "semanticHighlighting": true,
+    "completion": true
+  },
+  "workbench.activityBar.location": "hidden",
+  "editor.accessibilitySupport": "off",
+  "workbench.statusBar.visible": false,
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
+  "window.customTitleBarVisibility": "never",
 }
