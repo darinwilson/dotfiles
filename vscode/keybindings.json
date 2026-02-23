@@ -1,117 +1,165 @@
 // Place your key bindings in this file to override the defaults
 [
-    /********************
-     * New keybindings
-     ********************/
-    /**
-    * Panels
-    **/
-    {
-        "key": "cmd+k cmd+e",
-        "command": "workbench.view.explorer"
-    },
-    {
-        "key": "cmd+k cmd+g",
-        "command": "workbench.view.scm"
-    },
-    {
-        "key": "cmd+k cmd+d",
-        "command": "workbench.view.debug"
-    },
-    {
-        "key": "cmd+k cmd+x",
-        "command": "workbench.extensions.action.showEnabledExtensions"
-    },
-    {
-        "key": "cmd+k cmd+b",
-        "command": "workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "cmd+k cmd+a",
-        "command": "workbench.action.toggleActivityBarVisibility"
-    },
-    {
-        "key": "cmd+e",
-        "command": "workbench.action.focusActiveEditorGroup"
-    },
-    {
-        "key": "cmd+t",
-        "command": "workbench.action.terminal.toggleTerminal"
-    },
+  /********************
+   * New keybindings
+   ********************/
+  /**
+   * Panels
+   **/
+  {
+    "key": "cmd+k cmd+e",
+    "command": "workbench.view.explorer",
+  },
+  {
+    "key": "cmd+k cmd+g",
+    "command": "workbench.view.scm",
+  },
+  {
+    "key": "cmd+k cmd+d",
+    "command": "workbench.view.debug",
+  },
+  {
+    "key": "cmd+k cmd+x",
+    "command": "workbench.extensions.action.showEnabledExtensions",
+  },
+  {
+    "key": "cmd+k cmd+b",
+    "command": "workbench.action.toggleSidebarVisibility",
+  },
+  {
+    "key": "cmd+k cmd+a",
+    "command": "workbench.action.toggleActivityBarVisibility",
+  },
+  {
+    "key": "cmd+k cmd+i",
+    "command": "cline.openInNewTab",
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.focusActiveEditorGroup",
+  },
+  {
+    "key": "cmd+t",
+    "command": "workbench.action.terminal.toggleTerminal",
+  },
 
-    /**
-     * Dropdown navigation
-     **/
-    {
-        "key": "ctrl+j",
-        "command": "selectNextSuggestion",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "key": "ctrl+k",
-        "command": "selectPrevSuggestion",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "key": "ctrl+k",
-        "command": "workbench.action.quickOpenSelectPrevious",
-        "when": "inQuickOpen"
-    },
-    {
-        "key": "ctrl+p",
-        "command": "-workbench.action.quickOpenSelectPrevious",
-        "when": "inQuickOpen"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "workbench.action.quickOpenSelectNext",
-        "when": "inQuickOpen"
-    },
-    {
-        "key": "ctrl+shift+c",
-        "command": "workbench.panel.interactiveSessionSidebar.copilot"
-    },
+  /**
+   * Dropdown navigation
+   **/
+  {
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+  },
+  {
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "workbench.panel.interactiveSessionSidebar.copilot",
+  },
 
-    /**
-     * File Explorer
-     **/
-    {
-        "key": "cmd+d",
-        "command": "duplicate.execute",
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
-    },
-    {
-        "key": "cmd+n",
-        "command": "explorer.newFile",
-        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-    {
-        "key": "shift+cmd+n",
-        "command": "explorer.newFolder",
-        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
+  /**
+   * File Explorer
+   **/
+  {
+    "key": "cmd+d",
+    "command": "duplicate.execute",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus",
+  },
+  {
+    "key": "cmd+n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus",
+  },
+  {
+    "key": "shift+cmd+n",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus",
+  },
 
-    /**
-     * Copilot
-     */
-    {
-        "key": "cmd+u",
-        "command": "workbench.action.chat.startVoiceChat",
-        "when": "!voiceChatInProgress"
+  /**
+   * Copilot
+   */
+  {
+    "key": "cmd+u",
+    "command": "workbench.action.chat.startVoiceChat",
+    "when": "!voiceChatInProgress",
+  },
+  {
+    "key": "cmd+u",
+    "command": "workbench.action.chat.stopListeningAndSubmit",
+    "when": "voiceChatInProgress",
+  },
+  {
+    "key": "ctrl+w q",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "!editorTextFocus && !filesExplorerFocus && !searchViewletFocus && !terminalFocus && neovim.mode != 'cmdline'",
+  },
+  {
+    "key": "ctrl+w q",
+    "command": "-workbench.action.closeActiveEditor",
+    "when": "!editorTextFocus && !filesExplorerFocus && !searchViewletFocus && !terminalFocus && neovim.mode != 'cmdline'",
+  },
+  {
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\\\r\n",
     },
-    {
-        "key": "cmd+u",
-        "command": "workbench.action.chat.stopListeningAndSubmit",
-        "when": "voiceChatInProgress"
-    },
-    {
-        "key": "ctrl+w q",
-        "command": "workbench.action.closeActiveEditor",
-        "when": "!editorTextFocus && !filesExplorerFocus && !searchViewletFocus && !terminalFocus && neovim.mode != 'cmdline'"
-    },
-    {
-        "key": "ctrl+w q",
-        "command": "-workbench.action.closeActiveEditor",
-        "when": "!editorTextFocus && !filesExplorerFocus && !searchViewletFocus && !terminalFocus && neovim.mode != 'cmdline'"
-    }
+    "when": "terminalFocus",
+  },
+  {
+    "key": "alt+cmd+1",
+    "command": "workbench.action.terminal.focusAtIndex1",
+  },
+  {
+    "key": "alt+cmd+3",
+    "command": "workbench.action.terminal.focusAtIndex3",
+  },
+  {
+    "key": "alt+cmd+4",
+    "command": "workbench.action.terminal.focusAtIndex4",
+  },
+  {
+    "key": "alt+cmd+5",
+    "command": "workbench.action.terminal.focusAtIndex5",
+  },
+  {
+    "key": "alt+cmd+6",
+    "command": "workbench.action.terminal.focusAtIndex6",
+  },
+  {
+    "key": "alt+cmd+7",
+    "command": "workbench.action.terminal.focusAtIndex7",
+  },
+  {
+    "key": "alt+cmd+8",
+    "command": "workbench.action.terminal.focusAtIndex8",
+  },
+  {
+    "key": "alt+cmd+9",
+    "command": "workbench.action.terminal.focusAtIndex9",
+  },
+  {
+    "key": "alt+cmd+2",
+    "command": "workbench.action.terminal.focusAtIndex2",
+  },
 ]

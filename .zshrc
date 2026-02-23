@@ -54,13 +54,13 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/mysql/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.node/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.node/bin:/Applications/Postgres.app/Contents/Versions/15/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='nvim'
+export EDITOR="/Users/darin/work/oss/neovim/nvim-macos-arm64/bin/nvim"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -112,12 +112,11 @@ alias gpp='git pull; git push origin'
 alias gbr='git branch'
 alias gstapp='git stash pop'
 alias gaa='git add -A'
-alias gh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
-unalias gl
-alias gl='git config --get remote.origin.url | ruby -ne "puts %{https://gitlab.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}" | xargs open'
+alias ogh='git config --get remote.origin.url | ruby -ne "puts %{https://github.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}"| xargs open'
+alias ogl='git config --get remote.origin.url | ruby -ne "puts %{https://gitlab.com/#{\$_.split(/.com[\:\/]/)[-1].gsub(%{.git},%{})}}" | xargs open'
 
 # projects
-alias cdsad='cd ~/files/music/Song-A-Day\ 2025'
+alias cdsad='cd ~/files/music/Song-A-Day\ 2026/mixes'
 
 # ruby/rails
 alias be='bundle exec'
@@ -153,8 +152,7 @@ brew-info() { brew info $@ | grep -Eo "^https?://[^[:space:]]+" | xargs open }
 alias psql='psql -P pager'
 
 # java
-#export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 export PATH=$JAVA_HOME/bin:$PATH
 
 
@@ -184,7 +182,7 @@ source ~/.servers
 
 # ucb
 source ~/.ucb_env
-export RAILS_MASTER_KEY=`cat ~/.ucb_rails_master_key`
+#export RAILS_MASTER_KEY=`cat ~/.ucb_rails_master_key`
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -272,8 +270,14 @@ then
   #vscode_tmux_launch
 fi
 
-. "$HOME/.asdf/asdf.sh"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.volta/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f "/Users/darin/.ghcup/env" ] && . "/Users/darin/.ghcup/env" # ghcup-env
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/darin/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# Added by Antigravity
+export PATH="/Users/darin/.antigravity/antigravity/bin:$PATH"
