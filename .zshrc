@@ -265,10 +265,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(rbenv init - zsh)"
 
 # launch associated tmux session if we're in VS Code
-if [ $TERM_PROGRAM = "vscode" ]
-then
+#if [ $TERM_PROGRAM = "vscode" ]
+#then
   #vscode_tmux_launch
-fi
+#fi
 
 export PATH="$HOME/.volta/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -281,3 +281,4 @@ export PATH="$PATH:/Users/darin/.lmstudio/bin"
 
 # Added by Antigravity
 export PATH="/Users/darin/.antigravity/antigravity/bin:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin
