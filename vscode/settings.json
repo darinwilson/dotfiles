@@ -23,6 +23,7 @@
   "files.trimTrailingWhitespace": true,
   "window.nativeFullScreen": false,
   "window.newWindowDimensions": "inherit",
+  "workbench.experimental.modernUI": false,
   "workbench.editor.showTabs": "single",
   "workbench.panel.defaultLocation": "left",
   "workbench.startupEditor": "none",
@@ -154,4 +155,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "terminal.integrated.tabs.enabled": false,
+  "github.copilot.enable": {
+    "*": false,
+  },
+  "git.openRepositoryInParentFolders": "never",
 }

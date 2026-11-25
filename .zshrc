@@ -282,3 +282,22 @@ export PATH="$PATH:/Users/darin/.lmstudio/bin"
 # Added by Antigravity
 export PATH="/Users/darin/.antigravity/antigravity/bin:$PATH"
 export PATH=$PATH:$HOME/.maestro/bin
+command -v maacs >/dev/null && command -v compdef >/dev/null && source <(maacs complete zsh) || true
+
+# pnpm
+export PNPM_HOME="/Users/darin/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Added by Devin
+export PATH="/Users/darin/.codeium/windsurf/bin:$PATH"
+
+# bun completions
+[ -s "/Users/darin/.bun/_bun" ] && source "/Users/darin/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
